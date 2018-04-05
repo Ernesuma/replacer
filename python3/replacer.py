@@ -3,8 +3,8 @@
 # parameters
 # ----------
 text_set = set()
-filler_dict = {"mail":"test@mail.de",
-               "date":"04.04.2018"}
+filler_dict = {"mail": "test@mail.de",
+               "date": "04.04.2018"}
 text_set.add('test')
 
 
@@ -25,17 +25,22 @@ class Replacer():
         return self._filled_text
 
     def fill(self):
-        self._filled_text = self._text
-        for entry in self._filler.keys:
-            print(entry)
-            self._filled_text = self._filled_text.replace('\{{}\}'.format(entry))
-        return self._text
+        self._filled_text = str(self._text)
+        fd = self.get_filler_dict()
+        # for filler_key in iter(self._filler):
+        for filler_key in self._filler.keys():
+            print("DEBUG: filler key: '{}'".format(filler_key))
+
+            self._filled_text = self._filled_text.replace('{{{}}}'.format(filler_key), fd[filler_key])
+            print("DEBUG: filled text: '{}'".format(self._filled_text))
+        return self._filled_text
 
 
 if '__main__' == __name__:
-    myReplacer = Replacer('Hello World!', {})
+    myReplacer = Replacer('Hello {name}!', {'name': 'World'})
 
     print(myReplacer)
 
     print(myReplacer.get_text())
     print(myReplacer.get_filler_dict())
+    print(myReplacer.get_filled_text())
