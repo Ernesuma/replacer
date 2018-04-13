@@ -1,0 +1,9 @@
+Hallo meine sehr geehrten Damen und Herren,
+
+hiermit möchte ich ihnen mitteilen, das ich, {name} derzeit nicht zur Verfügung stehe. Ab dem {date} dürfen Sie wieder mit meiner Anwesenheit rechnen. Bis dahin wenden Sie sich bitte in dringenden Fällen an meine Vertretung{Vertretung_plural_suffix}:
+
+{vertretung_name_1}
+{vertretung_email_1}
+
+{vertretung_name_2}
+{vertretung_email_2}
