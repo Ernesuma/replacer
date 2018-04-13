@@ -15,7 +15,7 @@ filler_dict = {"mail": "test@mail.de",
                "date": "04.04.2018"}
 text_set.add('test')
 
-re_replacee = re.compile(r"({\w+})")
+re_replacee = re.compile(r"({(\w+)})")
 # re_replacee = re.compile(r"[^{]({\w+})[^{]")
 
 
@@ -38,26 +38,18 @@ class Replacer():
             # iterate over csv rows
             for row in csv_2_dict_reader:
                 # check for double id definitions
-                if row('id') not in filler_dict:
-                    filler_dict[row('id')] = row('value')
+                if row['id'] not in filler_dict:
+                    filler_dict[row['id']] = row['value']
                 else:
                     print(f"WARNING: Double definition of id '{row['id']}' in '{csv_path}'")
-
-        # debug print
-        print(filler_dict)
 
         return filler_dict
 
     def filled_text_gen(self):
         with self._text_file_path.open() as text_file:
             for line in text_file:
-                replacee = line
-                match_objects = re_replacee.finditer(line)
-                if match_objects:
-                    for match in match_objects:
-                        print(match)
-
-                yield line
+                replacee = replace(line, self.get_filler_dict())
+                yield replacee
 
 #   def fill(self):
 #       self._filled_text = str(self._text)
@@ -71,12 +63,41 @@ class Replacer():
 #       return self._filled_text
 
 
+def replace(string, filler):
+    """
+    """
+    replacee = string
+
+    match_objects = re_replacee.finditer(string)
+    if match_objects:
+        for match in match_objects:
+            replacee = repl(replacee, match, filler)
+    else:
+        print('No matches!')
+
+    return replacee
+
+
+def repl(string, match, filler):
+    reple = string
+
+    match_str = match.group(1)
+    match_key = match.group(2)
+
+    # check for match in filler
+    if match_key not in filler:
+        print("ERROR: '{}' not found in filler dictionary".format(match_key))
+    else:
+        # reple = reple.replace('{{{}}}'.format(match_key), filler[match_key])
+        reple = reple.replace(match_str, filler[match_key])
+    return reple
+
+
 if '__main__' == __name__:
     my_replacer = Replacer(test_text_path, filler_csv_path)
     print(my_replacer)
 
-    counter = 0
-    for line in my_replacer.filled_text_gen():
-        print(counter)
-        counter += 1
-        print(line)
+    with Path('out.txt').open('w') as out_text:
+        for line in my_replacer.filled_text_gen():
+            print(line)
+            out_text.write(line)
