@@ -4,8 +4,12 @@
 
 # build directories
 build/
+_build/
 qt5/build-*/
+
+# install directories
 install/
+_install/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

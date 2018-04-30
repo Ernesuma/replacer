@@ -16,7 +16,7 @@ cReplacer::~cReplacer()
 
 std::string cReplacer::print_text()
 {
-    std::cout << m_text << std::endl;
+    std::cout << m_text.c_str() << std::endl;
     return m_text;
 }
 
