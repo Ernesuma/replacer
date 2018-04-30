@@ -4,7 +4,9 @@
 
 # build directories
 build/
+_build/
 install/
+_install/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
