@@ -4,6 +4,7 @@
 
 # build directories
 build/
+qt5/build-*/
 install/
 
 # Byte-compiled / optimized / DLL files
