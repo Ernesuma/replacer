@@ -13,8 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->listView->setModel(m_pModel.get());
-    ui->listView->show();
+    ui->tableView->setModel(m_pModel.get());
+    ui->tableView->show();
 
 }
 
