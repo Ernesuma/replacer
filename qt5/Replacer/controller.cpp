@@ -1,43 +1,43 @@
 #include <QtDebug>
 #include <QApplication>
 #include <QClipboard>
-#include "model.h"
+#include "controller.h"
 
-Model::Model()
+Controller::Controller()
 {
 
 }
 
-Model::~Model()
+Controller::~Controller()
 {
 
 }
 
-QString &Model::SetPlainText(const QString& plainText)
+QString &Controller::SetPlainText(const QString& plainText)
 {
     m_plainText = plainText;
     return m_plainText;
 }
 
-QString Model::GetPlainText() const
+QString Controller::GetPlainText() const
 {
     return m_plainText;
 }
 
-QString Model::GetFinalText() const
+QString Controller::GetFinalText() const
 {
     QString finalText{this->GetPlainText() + "This is final!"};
     return finalText;
 }
 
-QString Model::Plain2Clipboard() const
+QString Controller::Plain2Clipboard() const
 {
     QString tmp = this->GetPlainText();
     QApplication::clipboard()->setText(tmp);
     return tmp;
 }
 
-QString Model::Final2Clipboard() const
+QString Controller::Final2Clipboard() const
 {
     QString tmp = this->GetFinalText();
     QApplication::clipboard()->setText(tmp);

@@ -1,18 +1,18 @@
-#ifndef MODEL_H
-#define MODEL_H
+#ifndef CONTROLLER_H
+#define CONTROLLER_H
 
 //#include <memory>
 //#include "ui_mainwindow.h"
 
-class Model
+class Controller
 {
 private:
     //std::unique_ptr<Ui::MainWindow> m_pUiHandle;
     QString m_plainText{""};
 
 public:
-    Model();
-    ~Model();
+    Controller();
+    ~Controller();
 
     QString& SetPlainText(const QString& plainText);
     QString GetPlainText() const;
@@ -21,4 +21,4 @@ public:
     QString Final2Clipboard() const;
 };
 
-#endif // MODEL_H
+#endif // CONTROLLER_H
