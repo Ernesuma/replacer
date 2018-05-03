@@ -7,9 +7,15 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    m_controller()
+    m_controller(),
+    m_list("one"),
+    m_pModel(new StringListModel(m_list))
 {
     ui->setupUi(this);
+
+    ui->listView->setModel(m_pModel.get());
+    ui->listView->show();
+
 }
 
 MainWindow::~MainWindow()
@@ -39,4 +45,9 @@ void MainWindow::on_pushButton_replace_clicked()
 {
     QString finalText{m_controller.GetFinalText()};
     ui->textEdit_final->setPlainText(finalText);
+}
+
+void MainWindow::on_pushButton_add_2_tag_list_clicked()
+{
+    m_pModel.get()->insertRow(0);
 }
