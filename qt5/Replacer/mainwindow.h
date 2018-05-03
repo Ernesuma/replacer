@@ -17,12 +17,10 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_c2c_plain_clicked();
-
     void on_textEdit_plain_textChanged();
 
+    void on_pushButton_c2c_plain_clicked();
     void on_pushButton_c2c_final_clicked();
-
     void on_pushButton_replace_clicked();
 
 private:
