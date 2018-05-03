@@ -47,16 +47,26 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_3">
+           <widget class="QPushButton" name="pushButton_replace">
             <property name="text">
-             <string>Copy to Clipboard</string>
+             <string>Replace</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_c2c_plain">
+            <property name="text">
+             <string>To Clipboard</string>
             </property>
            </widget>
           </item>
          </layout>
         </item>
         <item>
-         <widget class="QTextEdit" name="textEdit">
+         <widget class="QTextEdit" name="textEdit_plain">
+          <property name="whatsThis">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;enter the text you want to have the replacees in&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="placeholderText">
            <string>&lt;enter your text here&gt;</string>
           </property>
@@ -85,16 +95,16 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="pushButton_c2c_final">
             <property name="text">
-             <string>Copy to Clipboard</string>
+             <string>To Clipboard</string>
             </property>
            </widget>
           </item>
          </layout>
         </item>
         <item>
-         <widget class="QTextEdit" name="textEdit_2">
+         <widget class="QTextEdit" name="textEdit_final">
           <property name="textInteractionFlags">
            <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
           </property>
@@ -206,7 +216,7 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_3">
              <item>
-              <widget class="QPushButton" name="pushButton_2">
+              <widget class="QPushButton" name="pushButton_add_2_tag_list">
                <property name="text">
                 <string>Add to Tag List</string>
                </property>
