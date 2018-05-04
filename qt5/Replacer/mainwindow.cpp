@@ -1,15 +1,14 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
-
-#include <QtDebug>
-#include <QString>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    m_controller()
+    m_controller(),
+    m_pTagMapModel(new TagMapModel())
 {
     ui->setupUi(this);
+    ui->tableView->setModel(m_pTagMapModel.get());
+    ui->tableView->show();
 }
 
 MainWindow::~MainWindow()
@@ -39,4 +38,10 @@ void MainWindow::on_pushButton_replace_clicked()
 {
     QString finalText{m_controller.GetFinalText()};
     ui->textEdit_final->setPlainText(finalText);
+}
+
+void MainWindow::on_pushButton_add_2_tag_list_clicked()
+{
+    qInfo() << "add tag";
+    m_pTagMapModel.get()->insertRow(m_pTagMapModel.get()->rowCount());
 }
