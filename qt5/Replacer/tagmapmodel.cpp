@@ -163,3 +163,16 @@ bool TagMapModel::removeRows(int row, int count, const QModelIndex &parent)
     endRemoveRows();
     return true;
 }
+
+bool TagMapModel::removeRows(const QModelIndexList rows)
+{
+    QList<QString> keys = m_map.uniqueKeys();
+
+    // remove the rows in reversed order to avoid invalid rows to be removed:
+    // -->by starting with the high row numbers, the low ones are unaffected so long
+    for (auto rows_iter = rows.rbegin(); rows_iter != rows.rend(); ++rows_iter)
+    {
+        qDebug() << "remove row " << (*rows_iter).row();
+        this->removeRow(rows_iter->row());
+    }
+}

@@ -40,8 +40,11 @@ void MainWindow::on_pushButton_replace_clicked()
 
 void MainWindow::on_pushButton_add_2_tag_list_clicked()
 {
+    // TEST: some test implementation
     qInfo() << "add tag";
     //m_pTagMapModel.get()->insertRow(m_pTagMapModel.get()->rowCount());
+    int tmp = m_controller.GetTagMapModelRaw()->rowCount();
+    m_controller.GetTagMapModelRaw()->insertRow(tmp);
 }
 
 void MainWindow::on_pushButton_remove_tag_clicked()
@@ -50,4 +53,5 @@ void MainWindow::on_pushButton_remove_tag_clicked()
     QItemSelectionModel* pSelect{ui->tableView->selectionModel()};
     QModelIndexList rows = pSelect->selectedRows();
     m_controller.RemoveTags(rows);
+    ui->tableView->clearSelection();
 }

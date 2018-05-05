@@ -34,6 +34,7 @@ public:
 
     bool insertRows(int row, int count, const QModelIndex &parent);
     bool removeRows(int row, int count, const QModelIndex &parent);
+    bool removeRows(const QModelIndexList rows);
 };
 
 #endif // TAGMAPMODEL_H
