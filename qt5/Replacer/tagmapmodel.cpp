@@ -104,7 +104,7 @@ QVariant TagMapModel::data(const QModelIndex &index, const int role) const
     }
     else
     {
-        qDebug() << "WARNING: no valid return possible on index (" << index.row() << "," << index.column() << ") and role " << role ;
+        //qDebug() << "WARNING: no valid return possible on index (" << index.row() << "," << index.column() << ") and role " << role ;
         return QVariant();
     }
 }
@@ -143,7 +143,7 @@ bool TagMapModel::insertRows(int row, int count, const QModelIndex &parent)
 
 bool TagMapModel::removeRows(int row, int count, const QModelIndex &parent)
 {
-    qInfo() << "remove rows";
+    qDebug() << "DEBUG: TagMapModel::removeRows(row, count, parent)";
     // inform connected views about the starting removal of rows
     beginRemoveRows(parent, row, row+count-1);
 
