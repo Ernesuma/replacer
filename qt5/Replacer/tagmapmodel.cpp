@@ -166,13 +166,27 @@ bool TagMapModel::removeRows(int row, int count, const QModelIndex &parent)
 
 bool TagMapModel::removeRows(const QModelIndexList rows)
 {
-    QList<QString> keys = m_map.uniqueKeys();
+    auto keys = m_map.uniqueKeys();
+
+    QList<int> row_list;
+
+    // extract rows as row_list
+    for (auto rows_iter = rows.begin(); rows_iter != rows.end(); ++rows_iter)
+    {
+        row_list.append(rows_iter->row());
+    }
+
+    qDebug() << "DEBUG: TagMapModel::removeRows(rows): before: " << row_list;
+    // sort row_list
+    std::sort(row_list.begin(), row_list.end());
+    qDebug() << "DEBUG: TagMapModel::removeRows(rows): after: " << row_list;
 
     // remove the rows in reversed order to avoid invalid rows to be removed:
     // -->by starting with the high row numbers, the low ones are unaffected so long
-    for (auto rows_iter = rows.rbegin(); rows_iter != rows.rend(); ++rows_iter)
+    for (auto row_iter = row_list.rbegin(); row_iter != row_list.rend(); ++row_iter)
     {
-        qDebug() << "remove row " << (*rows_iter).row();
-        this->removeRow(rows_iter->row());
+        qDebug() << "DEBUG: TagMapModel::removeRows(rows): remove row now: " << *row_iter;
+        this->removeRow(*row_iter);
     }
+    return true;
 }
