@@ -14,6 +14,8 @@ private:
     // private Member
     // --------------
     QMap<QString, QString> m_map;
+    QString m_newKey{""};
+    QString m_newValue{""};
 
 public:
     // declare constructors
@@ -33,6 +35,7 @@ public:
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
 
     bool insertRows(int row, int count, const QModelIndex &parent);
+    bool insert(const QString& key, const QString& value);
     bool removeRows(int row, int count, const QModelIndex &parent);
     bool removeRows(const QModelIndexList rows);
 };

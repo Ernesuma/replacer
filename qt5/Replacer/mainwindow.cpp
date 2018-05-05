@@ -43,8 +43,9 @@ void MainWindow::on_pushButton_add_2_tag_list_clicked()
     // TEST: some test implementation
     qInfo() << "add tag";
     //m_pTagMapModel.get()->insertRow(m_pTagMapModel.get()->rowCount());
-    int tmp = m_controller.GetTagMapModelRaw()->rowCount();
-    m_controller.GetTagMapModelRaw()->insertRow(tmp);
+    auto key = ui->lineEdit_newTag->text();
+    auto value = ui->lineEdit_newValue->text();
+    m_controller.GetTagMapModelRaw()->insert(key, value);
 }
 
 void MainWindow::on_pushButton_remove_tag_clicked()

@@ -130,15 +130,39 @@ QVariant TagMapModel::headerData(int section, Qt::Orientation orientation, int r
 
 bool TagMapModel::insertRows(int row, int count, const QModelIndex &parent)
 {
-    beginInsertRows(parent, row, row+count-1);
-    qDebug() << "insert rows";
-    for (int i{row}; i<row+count; ++i)
+    if (1 == count)
     {
-        m_map[QString::number(row)] = "";
-    }
+        beginInsertRows(parent, row, row+count-1);
+        qDebug() << "DEBUG: TagMapModel::insertRows(" << row << "," << count << ")";
+        for (int i{row}; i<row+count; ++i)
+        {
+            m_map[m_newKey] = m_newValue;
+        }
 
-    endInsertRows();
+        endInsertRows();
+    }
+    else
+        return false;
     return true;
+}
+
+bool TagMapModel::insert(const QString& key, const QString& value)
+{
+    auto mapCopy = m_map;
+    mapCopy[key] = value;
+    auto newKeys = mapCopy.uniqueKeys();
+    int counter = 0;
+    foreach (auto newKey, newKeys)
+    {
+        if (key == newKey)
+        {
+            break;
+        }
+        ++counter;
+    }
+    m_newKey = key;
+    m_newValue = value;
+    this->insertRow(counter);
 }
 
 bool TagMapModel::removeRows(int row, int count, const QModelIndex &parent)

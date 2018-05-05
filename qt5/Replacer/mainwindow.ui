@@ -201,7 +201,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit"/>
+            <widget class="QLineEdit" name="lineEdit_newTag"/>
            </item>
            <item>
             <widget class="QLabel" name="label_4">
@@ -211,7 +211,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_2"/>
+            <widget class="QLineEdit" name="lineEdit_newValue"/>
            </item>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_3">
