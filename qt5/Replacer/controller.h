@@ -11,7 +11,7 @@ class Controller
 private:
     //std::unique_ptr<Ui::MainWindow> m_pUiHandle;
     QString m_plainText{""};
-    std::unique_ptr<TagMapModel> m_pTagMapModel{};
+    std::unique_ptr<TagMapModel> m_pTagMapModel{new TagMapModel()};
 
 public:
     Controller();
