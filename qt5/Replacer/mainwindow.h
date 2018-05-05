@@ -33,6 +33,8 @@ private slots:
 
     void on_pushButton_add_2_tag_list_clicked();
 
+    void on_pushButton_remove_tag_clicked();
+
 private:
     Ui::MainWindow *ui;
     Controller m_controller;

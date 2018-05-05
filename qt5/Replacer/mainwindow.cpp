@@ -45,3 +45,11 @@ void MainWindow::on_pushButton_add_2_tag_list_clicked()
     qInfo() << "add tag";
     m_pTagMapModel.get()->insertRow(m_pTagMapModel.get()->rowCount());
 }
+
+void MainWindow::on_pushButton_remove_tag_clicked()
+{
+    qInfo() << "clicked to remove selected tag";
+    QItemSelectionModel* pSelect{ui->tableView->selectionModel()};
+    QModelIndexList rows = pSelect->selectedRows();
+    m_controller.RemoveTags(rows);
+}

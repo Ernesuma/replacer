@@ -43,3 +43,8 @@ QString Controller::Final2Clipboard() const
     QApplication::clipboard()->setText(tmp);
     return tmp;
 }
+
+bool Controller::RemoveTags(const QModelIndexList &rows)
+{
+
+}

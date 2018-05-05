@@ -19,6 +19,8 @@ public:
     QString GetFinalText() const;
     QString Plain2Clipboard() const;
     QString Final2Clipboard() const;
+
+    bool RemoveTags(const QModelIndexList& rows);
 };
 
 #endif // CONTROLLER_H
