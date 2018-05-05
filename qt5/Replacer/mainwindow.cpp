@@ -46,6 +46,10 @@ void MainWindow::on_pushButton_add_2_tag_list_clicked()
     auto key = ui->lineEdit_newTag->text();
     auto value = ui->lineEdit_newValue->text();
     m_controller.GetTagMapModelRaw()->insert(key, value);
+
+    ui->lineEdit_newValue->clear();
+    ui->lineEdit_newTag->clear();
+    ui->lineEdit_newTag->setFocus();
 }
 
 void MainWindow::on_pushButton_remove_tag_clicked()
