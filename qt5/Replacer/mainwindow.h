@@ -5,14 +5,15 @@
 
 #include <QtDebug>
 #include <QString>
+#include <QModelIndex>
 //#include <QMap>
+//#include <memory>
 
 #include "ui_mainwindow.h"
 #include "controller.h"
-#include "tagmapmodel.h"
-#include "memory"
 
-namespace Ui {
+namespace Ui
+{
     class MainWindow;
 }
 
@@ -32,13 +33,11 @@ private slots:
     void on_pushButton_replace_clicked();
 
     void on_pushButton_add_2_tag_list_clicked();
-
     void on_pushButton_remove_tag_clicked();
 
 private:
     Ui::MainWindow *ui;
-    Controller m_controller;
-    std::unique_ptr<QAbstractTableModel> m_pTagMapModel;
+    Controller m_controller{};
 };
 
 #endif // MAINWINDOW_H

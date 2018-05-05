@@ -2,12 +2,10 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow),
-    m_controller(),
-    m_pTagMapModel(new TagMapModel())
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->tableView->setModel(m_pTagMapModel.get());
+    ui->tableView->setModel(m_controller.GetTagMapModelRaw());
     ui->tableView->show();
 }
 
@@ -43,7 +41,7 @@ void MainWindow::on_pushButton_replace_clicked()
 void MainWindow::on_pushButton_add_2_tag_list_clicked()
 {
     qInfo() << "add tag";
-    m_pTagMapModel.get()->insertRow(m_pTagMapModel.get()->rowCount());
+    //m_pTagMapModel.get()->insertRow(m_pTagMapModel.get()->rowCount());
 }
 
 void MainWindow::on_pushButton_remove_tag_clicked()
