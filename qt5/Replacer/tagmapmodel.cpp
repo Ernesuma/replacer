@@ -57,6 +57,8 @@ bool TagMapModel::setData(const QModelIndex &index, const QVariant &value, int r
     return false;
 }
 
+
+
 QVariant TagMapModel::data(const QModelIndex &index, const int role) const
 {
     if (!index.isValid())
@@ -92,4 +94,49 @@ QVariant TagMapModel::data(const QModelIndex &index, const int role) const
         qDebug() << "WARNING: no valid return possible on index (" << index.row() << "," << index.column() << ") and role " << role ;
         return QVariant();
     }
+}
+
+QVariant TagMapModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    if (Qt::DisplayRole == role)
+    {
+        if (Qt::Orientation::Horizontal == orientation)
+        {
+            if (0 == section)
+            {
+                return QString("Key");
+            }
+            else
+            {
+                return QString("Value");
+            }
+        }
+    }
+    return QVariant();
+}
+
+bool TagMapModel::insertRows(int row, int count, const QModelIndex &parent)
+{
+    beginInsertRows(parent, row, row+count-1);
+    qDebug() << "insert rows";
+    for (int i{row}; i<row+count; ++i)
+    {
+        m_map[QString::number(row)] = "";
+    }
+
+    endInsertRows();
+    return true;
+}
+
+bool TagMapModel::removeRows(int row, int count, const QModelIndex &parent)
+{
+    qInfo() << "remove rows";
+    beginRemoveRows(parent, row, row+count-1);
+    auto keys = m_map.uniqueKeys();
+    for (int i{row}; i<row+count; ++i)
+    {
+        m_map.remove(keys[i]);
+    }
+    endRemoveRows();
+    return true;
 }

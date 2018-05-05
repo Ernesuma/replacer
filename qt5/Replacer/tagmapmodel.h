@@ -30,20 +30,10 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const;
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
 
-    bool insertRows(int row, int count, const QModelIndex &parent)
-    {
-        beginInsertRows(QModelIndex(), row, row+count-1);
-        qInfo() << "insert rows";
-        m_map[QString(row)] = "zero";
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 
-        endInsertRows();
-        return true;
-    }
-    bool removeRows(int row, int count, const QModelIndex &parent)
-    {
-        qInfo() << "remove rows";
-        return true;
-    }
+    bool insertRows(int row, int count, const QModelIndex &parent);
+    bool removeRows(int row, int count, const QModelIndex &parent);
 };
 
 #endif // TAGMAPMODEL_H
