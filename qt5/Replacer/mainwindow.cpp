@@ -1,15 +1,12 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
-
-#include <QtDebug>
-#include <QString>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow),
-    m_controller()
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->tableView->setModel(m_controller.GetTagMapModelRaw());
+    ui->tableView->show();
 }
 
 MainWindow::~MainWindow()
@@ -39,4 +36,27 @@ void MainWindow::on_pushButton_replace_clicked()
 {
     QString finalText{m_controller.GetFinalText()};
     ui->textEdit_final->setPlainText(finalText);
+}
+
+void MainWindow::on_pushButton_add_2_tag_list_clicked()
+{
+    // TEST: some test implementation
+    qInfo() << "add tag";
+    //m_pTagMapModel.get()->insertRow(m_pTagMapModel.get()->rowCount());
+    auto key = ui->lineEdit_newTag->text();
+    auto value = ui->lineEdit_newValue->text();
+    m_controller.GetTagMapModelRaw()->insert(key, value);
+
+    ui->lineEdit_newValue->clear();
+    ui->lineEdit_newTag->clear();
+    ui->lineEdit_newTag->setFocus();
+}
+
+void MainWindow::on_pushButton_remove_tag_clicked()
+{
+    qInfo() << "clicked to remove selected tag";
+    QItemSelectionModel* pSelect{ui->tableView->selectionModel()};
+    QModelIndexList rows = pSelect->selectedRows();
+    m_controller.RemoveTags(rows);
+    ui->tableView->clearSelection();
 }

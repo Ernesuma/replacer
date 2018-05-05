@@ -2,9 +2,18 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+
+#include <QtDebug>
+#include <QString>
+#include <QModelIndex>
+//#include <QMap>
+//#include <memory>
+
+#include "ui_mainwindow.h"
 #include "controller.h"
 
-namespace Ui {
+namespace Ui
+{
     class MainWindow;
 }
 
@@ -23,9 +32,12 @@ private slots:
     void on_pushButton_c2c_final_clicked();
     void on_pushButton_replace_clicked();
 
+    void on_pushButton_add_2_tag_list_clicked();
+    void on_pushButton_remove_tag_clicked();
+
 private:
     Ui::MainWindow *ui;
-    Controller m_controller;
+    Controller m_controller{};
 };
 
 #endif // MAINWINDOW_H
