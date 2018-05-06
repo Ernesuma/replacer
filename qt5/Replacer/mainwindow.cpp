@@ -40,13 +40,16 @@ void MainWindow::on_pushButton_replace_clicked()
 
 void MainWindow::on_pushButton_add_2_tag_list_clicked()
 {
-    // TEST: some test implementation
-    qInfo() << "add tag";
-    //m_pTagMapModel.get()->insertRow(m_pTagMapModel.get()->rowCount());
+    qDebug() << "DEBUG: on_pushButton_add_2_tag_list_clicked()";
+
+    // read values to add to tag list from the lineEdits
     auto key = ui->lineEdit_newTag->text();
     auto value = ui->lineEdit_newValue->text();
+
+    // call the controller to add new entry to tag map model
     m_controller.GetTagMapModelRaw()->insert(key, value);
 
+    // set up GUI to comfortably add another tag entry
     ui->lineEdit_newValue->clear();
     ui->lineEdit_newTag->clear();
     ui->lineEdit_newTag->setFocus();
@@ -57,7 +60,7 @@ void MainWindow::on_pushButton_remove_tag_clicked()
     qDebug() << "DEBUG: on_pushButton_remove_tag_clicked(): clicked to remove selected tag(s)";
     QItemSelectionModel* pSelect{ui->tableView->selectionModel()};
     QModelIndexList rows = pSelect->selectedRows();
-    qDebug() << "DEBUG: on_pushButton_remove_tag_clicked(): selection: " << rows;
+    //qDebug() << "DEBUG: on_pushButton_remove_tag_clicked(): selection: " << rows;
     if (!rows.isEmpty())
     {
         m_controller.RemoveTags(rows);
