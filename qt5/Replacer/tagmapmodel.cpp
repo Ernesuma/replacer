@@ -106,7 +106,7 @@ QVariant TagMapModel::data(const QModelIndex &index, const int role) const
     }
     else
     {
-        //qDebug() << "WARNING: no valid return possible on index (" << index.row() << "," << index.column() << ") and role " << role ;
+        //qDebug() << "DEBUG: TagMapModel::data(): no valid return possible on index (" << index.row() << "," << index.column() << ") and role " << role ;
         return QVariant();
     }
 }

@@ -54,9 +54,10 @@ void MainWindow::on_pushButton_add_2_tag_list_clicked()
 
 void MainWindow::on_pushButton_remove_tag_clicked()
 {
-    qInfo() << "clicked to remove selected tag";
+    qDebug() << "DEBUG: on_pushButton_remove_tag_clicked(): clicked to remove selected tag(s)";
     QItemSelectionModel* pSelect{ui->tableView->selectionModel()};
     QModelIndexList rows = pSelect->selectedRows();
+    qDebug() << "DEBUG: on_pushButton_remove_tag_clicked(): selection: " << rows;
     if (!rows.isEmpty())
     {
         m_controller.RemoveTags(rows);
