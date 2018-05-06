@@ -6,7 +6,7 @@ TagMapModel::TagMapModel(QObject *pParent):
     m_map()
 {
     // TEST: add a test entry to the map
-    m_map["test_empty_constr"]="test_value_empty_constr";
+    //m_map["test_empty_constr"]="test_value_empty_constr";
 }
 
 TagMapModel::TagMapModel(const QMap<QString, QString> &map, QObject* pParent):
@@ -23,8 +23,10 @@ int TagMapModel::rowCount(const QModelIndex &parent) const
 int TagMapModel::columnCount(const QModelIndex &parent) const
 {
     // with an empty map there are no columns
+    // but the column count shall still be two because else you
+    // could not add first row
     if (m_map.isEmpty())
-        return 0;
+        return 2;
     else
         // a map consists of key/value pairs -> two columns
         return 2;
