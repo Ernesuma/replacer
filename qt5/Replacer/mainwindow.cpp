@@ -57,6 +57,9 @@ void MainWindow::on_pushButton_remove_tag_clicked()
     qInfo() << "clicked to remove selected tag";
     QItemSelectionModel* pSelect{ui->tableView->selectionModel()};
     QModelIndexList rows = pSelect->selectedRows();
-    m_controller.RemoveTags(rows);
+    if (!rows.isEmpty())
+    {
+        m_controller.RemoveTags(rows);
+    }
     ui->tableView->clearSelection();
 }
