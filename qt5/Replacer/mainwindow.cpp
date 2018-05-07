@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tableView->setStatusTip(tr("click on already defined tags or values to edit them"));
     ui->lineEdit_newTag->setStatusTip(tr("enter new tag"));
     ui->lineEdit_newValue->setStatusTip(tr("enter new tag value"));
-    ui->textEdit_plain->setStatusTip(tr("enter your text here; mark tags to be replaced with {tag}"));
+    ui->textEdit_plain->setStatusTip(tr("enter your text here; mark tags to be replaced with curly braces like: {myTag}"));
     ui->textEdit_final->setStatusTip(tr("here appears the final text after you hit button \"Replace\""));
 }
 
