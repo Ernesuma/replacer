@@ -1,17 +1,4 @@
-#include <QtDebug>
-#include <QApplication>
-#include <QClipboard>
 #include "controller.h"
-
-Controller::Controller()
-{
-
-}
-
-Controller::~Controller()
-{
-
-}
 
 QString &Controller::SetPlainText(const QString& plainText)
 {

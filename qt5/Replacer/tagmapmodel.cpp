@@ -4,10 +4,7 @@
 TagMapModel::TagMapModel(QObject *pParent):
     QAbstractTableModel(pParent),
     m_map()
-{
-    // TEST: add a test entry to the map
-    //m_map["test_empty_constr"]="test_value_empty_constr";
-}
+{ }
 
 TagMapModel::TagMapModel(const tagMap &map, QObject* pParent):
     QAbstractTableModel(pParent),

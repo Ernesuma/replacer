@@ -1,10 +1,14 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#include <memory>
 #include <QModelIndex>
+#include <QtDebug>
+#include <QApplication>
+#include <QClipboard>
+#include <memory>
 
 #include "tagmapmodel.h"
+#include "replacer.h"
 
 class Controller
 {
@@ -14,8 +18,10 @@ private:
     std::unique_ptr<TagMapModel> m_pTagMapModel{new TagMapModel()};
 
 public:
-    Controller();
-    ~Controller();
+    // constructor
+    Controller(){};
+    // destructor
+    ~Controller(){};
 
     // grant access to the raw pointer: USE WITH CARE!
     TagMapModel* GetTagMapModelRaw(){return m_pTagMapModel.get();};
