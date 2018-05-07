@@ -13,7 +13,11 @@ QString Controller::GetPlainText() const
 
 QString Controller::GetFinalText() const
 {
-    QString finalText{this->GetPlainText() + "This is final!"};
+    QString finalText{};
+    Replacer rep{};
+    rep.replace(this->GetPlainText(),
+                     finalText,
+                     m_pTagMapModel.get()->getTagMap());
     return finalText;
 }
 
