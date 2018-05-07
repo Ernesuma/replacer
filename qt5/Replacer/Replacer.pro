@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
         controller.cpp \
-        tagmapmodel.cpp
+        tagmapmodel.cpp \
+    replacer.cpp
 
 HEADERS += \
         mainwindow.h \
         controller.h \
-        tagmapmodel.h
+        tagmapmodel.h \
+    replacer.h
 
 FORMS += \
         mainwindow.ui
