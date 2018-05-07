@@ -6,6 +6,10 @@
 #include <QObject>
 #include <QMap>
 
+typedef QString tagMapKey;
+typedef QString tagMapValue;
+typedef QMap<tagMapKey, tagMapValue> tagMap;
+
 class TagMapModel : public QAbstractTableModel
 {
     Q_OBJECT
@@ -13,14 +17,16 @@ class TagMapModel : public QAbstractTableModel
 private:
     // private Member
     // --------------
-    QMap<QString, QString> m_map;
-    QString m_newKey{""};
-    QString m_newValue{""};
+
+    //
+    tagMap m_map{};
+    tagMapKey m_newKey{""};
+    tagMapKey m_newValue{""};
 
 public:
     // declare constructors
     TagMapModel(QObject *pParent=0);
-    TagMapModel(const QMap<QString, QString> &map, QObject* pParent = 0);
+    TagMapModel(const tagMap &map, QObject* pParent = 0);
 
     // empty destructor
     ~TagMapModel(){}
@@ -35,8 +41,8 @@ public:
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
 
     bool insertRows(int row, int count, const QModelIndex &parent);
-    bool insert(const QString& key, const QString& value);
     bool removeRows(int row, int count, const QModelIndex &parent);
+    bool insert(const tagMapKey& key, const tagMapValue& value);
     bool removeRows(const QModelIndexList rows);
 };
 

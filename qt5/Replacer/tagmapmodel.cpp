@@ -9,7 +9,7 @@ TagMapModel::TagMapModel(QObject *pParent):
     //m_map["test_empty_constr"]="test_value_empty_constr";
 }
 
-TagMapModel::TagMapModel(const QMap<QString, QString> &map, QObject* pParent):
+TagMapModel::TagMapModel(const tagMap &map, QObject* pParent):
     QAbstractTableModel(pParent),
     m_map(map)
 { }
@@ -53,7 +53,7 @@ bool TagMapModel::setData(const QModelIndex &index, const QVariant &value, int r
         if (index.column() == 0)
         {
             // save value
-            QString tmpVal = m_map[keys[index.row()]];
+            tagMapValue tmpVal = m_map[keys[index.row()]];
             // remove entry from map
             m_map.remove(keys[index.row()]);
             // add value with new key
@@ -148,7 +148,7 @@ bool TagMapModel::insertRows(int row, int count, const QModelIndex &parent)
     return true;
 }
 
-bool TagMapModel::insert(const QString& key, const QString& value)
+bool TagMapModel::insert(const tagMapKey &key, const tagMapValue &value)
 {
     auto mapCopy = m_map;
     mapCopy[key] = value;
