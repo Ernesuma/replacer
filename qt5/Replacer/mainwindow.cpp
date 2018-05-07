@@ -8,6 +8,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tableView->setModel(m_controller.GetTagMapModelRaw());
     ui->tableView->show();
 
+    // create the menus of the menu bar
+    createMenus();
+
     // set the status bar tooltips
     ui->pushButton_replace->setStatusTip(tr("replace all {…} tags from the plain text with corresponding values from tag list and print to final text view"));
     ui->pushButton_c2c_plain->setStatusTip(tr("copy plain text to clipboard"));
@@ -78,4 +81,55 @@ void MainWindow::on_pushButton_remove_tag_clicked()
         m_controller.RemoveTags(rows);
     }
     ui->tableView->clearSelection();
+}
+
+void MainWindow::exit()
+{
+    this->close();
+}
+
+void MainWindow::createMenus()
+{
+    // add menu "Menu" to the menuBar
+    // use tr(…) function to mark charecter acting as <Alt-…> keybinding
+    // (Note that menuBar takes ownership of the new menu! -> No explicit deletion of menuMenu needed!)
+    QMenu* menuMenu = ui->menuBar->addMenu(tr("&Menu"));
+    QMenu* menuHelp = ui->menuBar->addMenu(tr("&Help"));
+
+    // create "Exit" action
+    QAction *exitAction = new QAction(tr("&Exit"), this);
+    // add standard shortcut for closing
+    exitAction->setShortcut(QKeySequence::Quit);
+    // add status bar tooltip
+    exitAction->setStatusTip(tr("close this application"));
+    // connect this actions triggered SIGNAL to the MainWindow exit SLOT
+    connect(exitAction, &QAction::triggered, this, &MainWindow::exit);
+
+    QAction *saveAction = new QAction(tr("&Save"), this);
+    saveAction->setShortcut(QKeySequence::Save);
+    saveAction->setStatusTip(tr("save plain text and tag list"));
+
+    QAction *saveAsAction = new QAction(tr("Save &As"), this);
+    saveAsAction->setShortcut(QKeySequence::SaveAs);
+    saveAsAction->setStatusTip(tr("save plain text and tag list to …"));
+
+    QAction *loadAction = new QAction(tr("&Load"), this);
+    loadAction->setShortcut(QKeySequence::Open);
+    loadAction->setStatusTip(tr("load plain text and tag list from file…"));
+
+    QAction *newAction = new QAction(tr("&New"), this);
+    newAction->setShortcut(QKeySequence::New);
+    newAction->setStatusTip(tr("new project"));
+
+    QAction *aboutAction = new QAction(tr("&About"));
+    aboutAction->setStatusTip(tr("show about dialog"));
+
+    // add actions to menu
+    menuMenu->addAction(newAction);
+    menuMenu->addAction(loadAction);
+    menuMenu->addAction(saveAction);
+    menuMenu->addAction(saveAsAction);
+    menuMenu->addAction(exitAction);
+
+    menuHelp->addAction(aboutAction);
 }
