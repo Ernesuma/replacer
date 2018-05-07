@@ -7,6 +7,18 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->tableView->setModel(m_controller.GetTagMapModelRaw());
     ui->tableView->show();
+
+    // set the status bar tooltips
+    ui->pushButton_replace->setStatusTip(tr("replace all {…} tags from the plain text with corresponding values from tag list and print to final text view"));
+    ui->pushButton_c2c_plain->setStatusTip(tr("copy plain text to clipboard"));
+    ui->pushButton_c2c_final->setStatusTip(tr("copy final text to clipboard"));
+    ui->pushButton_remove_tag->setStatusTip(tr("remove all selected tags from the tag list"));
+    ui->pushButton_add_2_tag_list->setStatusTip(tr("add a new tag to the tag list"));
+    ui->tableView->setStatusTip(tr("click on already defined tags or values to edit them"));
+    ui->lineEdit_newTag->setStatusTip(tr("enter new tag"));
+    ui->lineEdit_newValue->setStatusTip(tr("enter new tag value"));
+    ui->textEdit_plain->setStatusTip(tr("enter your text here; mark tags to be replaced with {tag}"));
+    ui->textEdit_final->setStatusTip(tr("here appears the final text after you hit button \"Replace\""));
 }
 
 MainWindow::~MainWindow()
