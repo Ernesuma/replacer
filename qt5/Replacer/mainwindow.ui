@@ -109,7 +109,7 @@
            <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
           </property>
           <property name="placeholderText">
-           <string>&lt;text with filled in replacements&gt;</string>
+           <string>&lt;text with filled in replacements will appear here&gt;</string>
           </property>
          </widget>
         </item>
