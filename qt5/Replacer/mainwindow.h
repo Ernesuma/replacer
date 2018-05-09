@@ -35,7 +35,7 @@ private slots:
     void on_pushButton_add_2_tag_list_clicked();
     void on_pushButton_remove_tag_clicked();
 
-    void exit();
+    void menuExit();
 
 private:
     // private methods

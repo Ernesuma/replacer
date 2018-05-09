@@ -83,7 +83,7 @@ void MainWindow::on_pushButton_remove_tag_clicked()
     ui->tableView->clearSelection();
 }
 
-void MainWindow::exit()
+void MainWindow::menuExit()
 {
     this->close();
 }
@@ -103,7 +103,7 @@ void MainWindow::createMenus()
     // add status bar tooltip
     exitAction->setStatusTip(tr("close this application"));
     // connect this actions triggered SIGNAL to the MainWindow exit SLOT
-    connect(exitAction, &QAction::triggered, this, &MainWindow::exit);
+    connect(exitAction, &QAction::triggered, this, &MainWindow::menuExit);
 
     QAction *saveAction = new QAction(tr("&Save"), this);
     saveAction->setShortcut(QKeySequence::Save);
