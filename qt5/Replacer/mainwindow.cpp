@@ -108,6 +108,26 @@ void MainWindow::menuExit()
     this->close();
 }
 
+void MainWindow::menuExportPlain()
+{
+    qInfo() << "clicked 'export plain'";
+}
+
+void MainWindow::menuImportPlain()
+{
+    qInfo() << "'clicked 'import plain'";
+}
+
+void MainWindow::menuExportTagList()
+{
+    qInfo() << "clicked 'export tags'";
+}
+
+void MainWindow::menuImportTagList()
+{
+    qInfo() << "clicked 'import tags'";
+}
+
 void MainWindow::menuAbout()
 {
     qInfo() << "clicked 'About'";
@@ -121,6 +141,7 @@ void MainWindow::createMenus()
     // use tr(…) function to mark charecter acting as <Alt-…> keybinding
     // (Note that menuBar takes ownership of the new menu! -> No explicit deletion of menuMenu needed!)
     QMenu* menuMenu = ui->menuBar->addMenu(tr("&Menu"));
+    QMenu* menuData = ui->menuBar->addMenu(tr("&Date"));
     QMenu* menuHelp = ui->menuBar->addMenu(tr("&Help"));
 
     // create "Exit" action
@@ -152,6 +173,23 @@ void MainWindow::createMenus()
     newAction->setStatusTip(tr("new project"));
     connect(newAction, &QAction::triggered, this, &MainWindow::menuNew);
 
+    QAction* exportPlainAction = new QAction(tr("&Export Plain Text to File"));
+    exportPlainAction->setStatusTip("write plain text to a file");
+    connect(exportPlainAction, &QAction::triggered, this, &MainWindow::menuExportPlain);
+
+    QAction* importPlainAction = new QAction(tr("&Import Plain Text from File"));
+    importPlainAction->setStatusTip(tr("import plain text from a text file"));
+    connect(importPlainAction, &QAction::triggered, this, &MainWindow::menuImportPlain);
+
+    QAction* exportTagList = new QAction(tr("&Export Tag List to File"));
+    exportTagList->setStatusTip("write the tag list to a file");
+    connect(exportTagList, &QAction::triggered, this, &MainWindow::menuExportTagList);
+
+    QAction* importTagList = new QAction(tr("&Import Tag List to File"));
+    importTagList->setStatusTip(tr("import tag list from a file"));
+    connect(importTagList, &QAction::triggered, this, &MainWindow::menuImportTagList);
+
+
     QAction *aboutAction = new QAction(tr("&About"));
     aboutAction->setStatusTip(tr("show about dialog"));
     connect(aboutAction, &QAction::triggered, this, &MainWindow::menuAbout);
@@ -162,6 +200,11 @@ void MainWindow::createMenus()
     menuMenu->addAction(saveAction);
     menuMenu->addAction(saveAsAction);
     menuMenu->addAction(exitAction);
+
+    menuData->addAction(exportPlainAction);
+    menuData->addAction(importPlainAction);
+    menuData->addAction(exportTagList);
+    menuData->addAction(importTagList);
 
     menuHelp->addAction(aboutAction);
 }

@@ -42,8 +42,15 @@ private slots:
     void menuSaveAs();
     void menuExit();
 
+    // slots for Menu 'Date'
+    void menuExportPlain();
+    void menuImportPlain();
+    void menuExportTagList();
+    void menuImportTagList();
+
     // slots for menu 'Help'
     void menuAbout();
+
 private:
     // private methods
     void createMenus();
