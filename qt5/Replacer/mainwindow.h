@@ -35,8 +35,15 @@ private slots:
     void on_pushButton_add_2_tag_list_clicked();
     void on_pushButton_remove_tag_clicked();
 
+    // slots for menu 'Menu'
+    void menuNew();
+    void menuLoad();
+    void menuSave();
+    void menuSaveAs();
     void menuExit();
 
+    // slots for menu 'Help'
+    void menuAbout();
 private:
     // private methods
     void createMenus();

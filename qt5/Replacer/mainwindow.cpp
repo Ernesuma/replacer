@@ -83,10 +83,37 @@ void MainWindow::on_pushButton_remove_tag_clicked()
     ui->tableView->clearSelection();
 }
 
+void MainWindow::menuNew()
+{
+    qInfo() << "clicked 'New'";
+}
+
+void MainWindow::menuLoad()
+{
+    qInfo() << "clicked 'Load'";
+}
+
+void MainWindow::menuSave()
+{
+    qInfo() << "clicked 'Save'";
+}
+
+void MainWindow::menuSaveAs()
+{
+    qInfo() << "clicked 'Save As'";
+}
+
 void MainWindow::menuExit()
 {
     this->close();
 }
+
+void MainWindow::menuAbout()
+{
+    qInfo() << "clicked 'About'";
+}
+
+
 
 void MainWindow::createMenus()
 {
@@ -108,23 +135,28 @@ void MainWindow::createMenus()
     QAction *saveAction = new QAction(tr("&Save"), this);
     saveAction->setShortcut(QKeySequence::Save);
     saveAction->setStatusTip(tr("save plain text and tag list"));
+    connect(saveAction, &QAction::triggered, this, &MainWindow::menuSave);
 
     QAction *saveAsAction = new QAction(tr("Save &As"), this);
     saveAsAction->setShortcut(QKeySequence::SaveAs);
     saveAsAction->setStatusTip(tr("save plain text and tag list to …"));
+    connect(saveAsAction, &QAction::triggered, this, &MainWindow::menuSaveAs);
 
     QAction *loadAction = new QAction(tr("&Load"), this);
     loadAction->setShortcut(QKeySequence::Open);
     loadAction->setStatusTip(tr("load plain text and tag list from file…"));
+    connect(loadAction, &QAction::triggered, this, &MainWindow::menuLoad);
 
     QAction *newAction = new QAction(tr("&New"), this);
     newAction->setShortcut(QKeySequence::New);
     newAction->setStatusTip(tr("new project"));
+    connect(newAction, &QAction::triggered, this, &MainWindow::menuNew);
 
     QAction *aboutAction = new QAction(tr("&About"));
     aboutAction->setStatusTip(tr("show about dialog"));
+    connect(aboutAction, &QAction::triggered, this, &MainWindow::menuAbout);
 
-    // add actions to menu
+    // add actions to menus
     menuMenu->addAction(newAction);
     menuMenu->addAction(loadAction);
     menuMenu->addAction(saveAction);
