@@ -173,24 +173,25 @@ void MainWindow::createMenus()
     newAction->setStatusTip(tr("new project"));
     connect(newAction, &QAction::triggered, this, &MainWindow::menuNew);
 
-    QAction* exportPlainAction = new QAction(tr("&Export Plain Text to File"));
+    QAction* exportPlainAction = new QAction(tr("&Export Plain Text to File"), this);
     exportPlainAction->setStatusTip("write plain text to a file");
     connect(exportPlainAction, &QAction::triggered, this, &MainWindow::menuExportPlain);
 
-    QAction* importPlainAction = new QAction(tr("&Import Plain Text from File"));
+    QAction* importPlainAction = new QAction(tr("&Import Plain Text from File"), this);
     importPlainAction->setStatusTip(tr("import plain text from a text file"));
     connect(importPlainAction, &QAction::triggered, this, &MainWindow::menuImportPlain);
 
-    QAction* exportTagList = new QAction(tr("&Export Tag List to File"));
-    exportTagList->setStatusTip("write the tag list to a file");
-    connect(exportTagList, &QAction::triggered, this, &MainWindow::menuExportTagList);
+    QAction* exportFinalAction = new QAction(tr("&Export Final Text to File"), this);
+    exportFinalAction->setStatusTip(tr("write final text to file"));
+    connect(exportFinalAction, &QAction::triggered, this, &MainWindow::menuExportFinal);
 
     QAction* importTagList = new QAction(tr("&Import Tag List to File"));
+    QAction* importTagList = new QAction(tr("&Import Tag List to File"), this);
     importTagList->setStatusTip(tr("import tag list from a file"));
     connect(importTagList, &QAction::triggered, this, &MainWindow::menuImportTagList);
 
 
-    QAction *aboutAction = new QAction(tr("&About"));
+    QAction *aboutAction = new QAction(tr("&About"), this);
     aboutAction->setStatusTip(tr("show about dialog"));
     connect(aboutAction, &QAction::triggered, this, &MainWindow::menuAbout);
 
@@ -203,7 +204,7 @@ void MainWindow::createMenus()
 
     menuData->addAction(exportPlainAction);
     menuData->addAction(importPlainAction);
-    menuData->addAction(exportTagList);
+    menuData->addAction(exportFinalAction);
     menuData->addAction(importTagList);
 
     menuHelp->addAction(aboutAction);
