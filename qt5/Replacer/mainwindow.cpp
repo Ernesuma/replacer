@@ -116,6 +116,26 @@ void MainWindow::menuExit()
     this->close();
 }
 
+void MainWindow::m_menuMenuAboutToShow()
+{
+    qDebug() << "m_menuMenuAboutToShow()";
+}
+
+void MainWindow::m_menuDataAboutToShow()
+{
+    qDebug() << "m_menuDataAboutToShow()";
+
+    // disable export actions in the menu according to the availbility of the contents to export
+    m_actionExportPlain->setDisabled(m_controller.GetPlainText().isEmpty());
+    m_actionExportFinal->setDisabled(m_controller.GetFinalText().isEmpty());
+    m_actionExportTagList->setDisabled(m_controller.GetTagMapModelRaw()->getTagMap().isEmpty());
+}
+
+void MainWindow::m_menuHelpAboutToShow()
+{
+    qDebug() << "m_menuHelpAboutToShow()";
+}
+
 void MainWindow::menuExportPlain()
 {
     qInfo() << "clicked 'export plain'";
@@ -146,16 +166,14 @@ void MainWindow::menuAbout()
     qInfo() << "clicked 'About'";
 }
 
-
-
 void MainWindow::createMenus()
 {
     // add menu "Menu" to the menuBar
     // use tr(…) function to mark charecter acting as <Alt-…> keybinding
-    // (Note that menuBar takes ownership of the new menu! -> No explicit deletion of menuMenu needed!)
-    QMenu* menuMenu = ui->menuBar->addMenu(tr("&Menu"));
-    QMenu* menuData = ui->menuBar->addMenu(tr("&Date"));
-    QMenu* menuHelp = ui->menuBar->addMenu(tr("&Help"));
+    // (Note that menuBar takes ownership of the new menu! -> No explicit deletion of m_menuMenu needed!)
+    m_menuMenu = ui->menuBar->addMenu(tr("&Menu"));
+    m_menuData = ui->menuBar->addMenu(tr("&Date"));
+    m_menuHelp = ui->menuBar->addMenu(tr("&Help"));
 
     // create "Exit" action
     QAction *exitAction = new QAction(tr("&Exit"), this);
@@ -186,43 +204,50 @@ void MainWindow::createMenus()
     newAction->setStatusTip(tr("new project"));
     connect(newAction, &QAction::triggered, this, &MainWindow::menuNew);
 
-    QAction* exportPlainAction = new QAction(tr("&Export Plain Text to File"), this);
-    exportPlainAction->setStatusTip("write plain text to a file");
-    connect(exportPlainAction, &QAction::triggered, this, &MainWindow::menuExportPlain);
+    m_actionExportPlain = new QAction(tr("&Export Plain Text to File"), this);
+    m_actionExportPlain->setStatusTip("write plain text to a file");
+    connect(m_actionExportPlain, &QAction::triggered, this, &MainWindow::menuExportPlain);
 
     QAction* importPlainAction = new QAction(tr("&Import Plain Text from File"), this);
     importPlainAction->setStatusTip(tr("import plain text from a text file"));
     connect(importPlainAction, &QAction::triggered, this, &MainWindow::menuImportPlain);
 
-    QAction* exportFinalAction = new QAction(tr("&Export Final Text to File"), this);
-    exportFinalAction->setStatusTip(tr("write final text to file"));
-    connect(exportFinalAction, &QAction::triggered, this, &MainWindow::menuExportFinal);
+    m_actionExportFinal = new QAction(tr("&Export Final Text to File"), this);
+    m_actionExportFinal->setStatusTip(tr("write final text to file"));
+    connect(m_actionExportFinal, &QAction::triggered, this, &MainWindow::menuExportFinal);
 
-    QAction* exportTagListAction = new QAction(tr("&Export Tag List to File"), this);
-    exportTagListAction->setStatusTip("write the tag list to a file");
-    connect(exportTagListAction, &QAction::triggered, this, &MainWindow::menuExportTagList);
+    m_actionExportTagList = new QAction(tr("&Export Tag List to File"), this);
+    m_actionExportTagList->setStatusTip("write the tag list to a file");
+    connect(m_actionExportTagList, &QAction::triggered, this, &MainWindow::menuExportTagList);
 
     QAction* importTagList = new QAction(tr("&Import Tag List to File"), this);
     importTagList->setStatusTip(tr("import tag list from a file"));
     connect(importTagList, &QAction::triggered, this, &MainWindow::menuImportTagList);
-
 
     QAction *aboutAction = new QAction(tr("&About"), this);
     aboutAction->setStatusTip(tr("show about dialog"));
     connect(aboutAction, &QAction::triggered, this, &MainWindow::menuAbout);
 
     // add actions to menus
-    menuMenu->addAction(newAction);
-    menuMenu->addAction(loadAction);
-    menuMenu->addAction(saveAction);
-    menuMenu->addAction(saveAsAction);
-    menuMenu->addAction(exitAction);
+    // the QMenu::addAction takes ownership of the returned QAction
+    m_menuMenu->addAction(newAction);
+    m_menuMenu->addAction(loadAction);
+    m_menuMenu->addAction(saveAction);
+    m_menuMenu->addAction(saveAsAction);
+    m_menuMenu->addSeparator();
+    m_menuMenu->addAction(exitAction);
 
-    menuData->addAction(exportPlainAction);
-    menuData->addAction(importPlainAction);
-    menuData->addAction(exportFinalAction);
-    menuData->addAction(exportTagListAction);
-    menuData->addAction(importTagList);
+    m_menuData->addAction(importPlainAction);
+    m_menuData->addAction(importTagList);
+    m_menuData->addSeparator();
+    m_menuData->addAction(m_actionExportPlain);
+    m_menuData->addAction(m_actionExportFinal);
+    m_menuData->addAction(m_actionExportTagList);
 
-    menuHelp->addAction(aboutAction);
+    m_menuHelp->addAction(aboutAction);
+
+    // connect menus aboutToShow signals to MainWindows slots to handle this
+    connect(m_menuMenu, &QMenu::aboutToShow, this, &MainWindow::m_menuMenuAboutToShow);
+    connect(m_menuData, &QMenu::aboutToShow, this, &MainWindow::m_menuDataAboutToShow);
+    connect(m_menuHelp, &QMenu::aboutToShow, this, &MainWindow::m_menuHelpAboutToShow);
 }

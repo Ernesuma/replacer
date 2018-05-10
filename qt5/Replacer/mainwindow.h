@@ -52,6 +52,11 @@ private slots:
     // slots for menu 'Help'
     void menuAbout();
 
+    // slots to execute right before showing menus
+    void m_menuMenuAboutToShow();
+    void m_menuDataAboutToShow();
+    void m_menuHelpAboutToShow();
+
 private:
     // private methods
     void createMenus();
@@ -59,6 +64,14 @@ private:
     // member
     Ui::MainWindow *ui;
     Controller m_controller{};
+
+    QMenu *m_menuMenu{nullptr};
+    QMenu *m_menuData{nullptr};
+    QMenu *m_menuHelp{nullptr};
+
+    QAction *m_actionExportPlain{nullptr};
+    QAction *m_actionExportFinal{nullptr};
+    QAction *m_actionExportTagList{nullptr};
 };
 
 #endif // MAINWINDOW_H
