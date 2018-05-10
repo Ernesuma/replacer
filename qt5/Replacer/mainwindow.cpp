@@ -118,6 +118,11 @@ void MainWindow::menuImportPlain()
     qInfo() << "'clicked 'import plain'";
 }
 
+void MainWindow::menuExportFinal()
+{
+    qInfo() << "clicked 'export final'";
+}
+
 void MainWindow::menuExportTagList()
 {
     qInfo() << "clicked 'export tags'";
@@ -185,7 +190,10 @@ void MainWindow::createMenus()
     exportFinalAction->setStatusTip(tr("write final text to file"));
     connect(exportFinalAction, &QAction::triggered, this, &MainWindow::menuExportFinal);
 
-    QAction* importTagList = new QAction(tr("&Import Tag List to File"));
+    QAction* exportTagListAction = new QAction(tr("&Export Tag List to File"), this);
+    exportTagListAction->setStatusTip("write the tag list to a file");
+    connect(exportTagListAction, &QAction::triggered, this, &MainWindow::menuExportTagList);
+
     QAction* importTagList = new QAction(tr("&Import Tag List to File"), this);
     importTagList->setStatusTip(tr("import tag list from a file"));
     connect(importTagList, &QAction::triggered, this, &MainWindow::menuImportTagList);
@@ -205,6 +213,7 @@ void MainWindow::createMenus()
     menuData->addAction(exportPlainAction);
     menuData->addAction(importPlainAction);
     menuData->addAction(exportFinalAction);
+    menuData->addAction(exportTagListAction);
     menuData->addAction(importTagList);
 
     menuHelp->addAction(aboutAction);

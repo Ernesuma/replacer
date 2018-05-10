@@ -45,6 +45,7 @@ private slots:
     // slots for Menu 'Date'
     void menuExportPlain();
     void menuImportPlain();
+    void menuExportFinal();
     void menuExportTagList();
     void menuImportTagList();
 
