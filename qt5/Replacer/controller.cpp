@@ -1,36 +1,30 @@
 #include "controller.h"
 
-QString &Controller::SetPlainText(const QString& plainText)
+void Controller::SetPlainText(const QString& plainText)
 {
     m_plainText = plainText;
-    return m_plainText;
 }
 
-QString Controller::GetPlainText() const
+const QString &Controller::GetPlainText() const
 {
     return m_plainText;
 }
 
-QString Controller::GetFinalText() const
+const QString &Controller::GetFinalText() const
 {
-    QString finalText{};
-    Replacer rep{};
-    rep.replace(this->GetPlainText(),
-                     finalText,
-                     m_pTagMapModel.get()->getTagMap());
-    return finalText;
+    return m_finalText;
 }
 
-QString Controller::Plain2Clipboard() const
+const QString &Controller::Plain2Clipboard() const
 {
-    QString tmp = this->GetPlainText();
+    const QString& tmp = this->GetPlainText();
     QApplication::clipboard()->setText(tmp);
     return tmp;
 }
 
-QString Controller::Final2Clipboard() const
+const QString &Controller::Final2Clipboard() const
 {
-    QString tmp = this->GetFinalText();
+    const QString& tmp = this->GetFinalText();
     QApplication::clipboard()->setText(tmp);
     return tmp;
 }
@@ -38,4 +32,12 @@ QString Controller::Final2Clipboard() const
 bool Controller::RemoveTags(const QModelIndexList &rows)
 {
     m_pTagMapModel.get()->removeRows(rows);
+}
+
+bool Controller::replace()
+{
+    Replacer rep{};
+    return rep.replace(this->GetPlainText(),
+                        m_finalText,
+                        m_pTagMapModel.get()->getTagMap());
 }

@@ -15,6 +15,7 @@ class Controller
 private:
     //std::unique_ptr<Ui::MainWindow> m_pUiHandle;
     QString m_plainText{""};
+    QString m_finalText{""};
     std::unique_ptr<TagMapModel> m_pTagMapModel{new TagMapModel()};
 
 public:
@@ -26,13 +27,14 @@ public:
     // grant access to the raw pointer: USE WITH CARE!
     TagMapModel* GetTagMapModelRaw(){return m_pTagMapModel.get();};
 
-    QString& SetPlainText(const QString& plainText);
-    QString GetPlainText() const;
-    QString GetFinalText() const;
-    QString Plain2Clipboard() const;
-    QString Final2Clipboard() const;
+    void SetPlainText(const QString& plainText);
+    const QString &GetPlainText() const;
+    const QString &GetFinalText() const;
+    const QString &Plain2Clipboard() const;
+    const QString &Final2Clipboard() const;
 
     bool RemoveTags(const QModelIndexList& rows);
+    bool replace();
 };
 
 #endif // CONTROLLER_H

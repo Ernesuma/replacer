@@ -49,7 +49,15 @@ void MainWindow::on_pushButton_c2c_final_clicked()
 
 void MainWindow::on_pushButton_replace_clicked()
 {
-    QString finalText{m_controller.GetFinalText()};
+    QString finalText{"Error while replacing"};
+    if (m_controller.replace())
+    {
+        finalText = m_controller.GetFinalText();
+    }
+    else
+    {
+        qWarning() << "WARNING: could not replace tags";
+    }
     ui->textEdit_final->setPlainText(finalText);
 }
 
