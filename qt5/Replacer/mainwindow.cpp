@@ -184,6 +184,11 @@ void MainWindow::createMenus()
     // connect this actions triggered SIGNAL to the MainWindow exit SLOT
     connect(exitAction, &QAction::triggered, this, &MainWindow::menuExit);
 
+    QAction *newAction = new QAction(tr("&New"), this);
+    newAction->setShortcut(QKeySequence::New);
+    newAction->setStatusTip(tr("create new project"));
+    connect(newAction, &QAction::triggered, this, &MainWindow::menuNew);
+
     QAction *saveAction = new QAction(tr("&Save"), this);
     saveAction->setShortcut(QKeySequence::Save);
     saveAction->setStatusTip(tr("save project"));
@@ -199,18 +204,17 @@ void MainWindow::createMenus()
     loadAction->setStatusTip(tr("load project"));
     connect(loadAction, &QAction::triggered, this, &MainWindow::menuLoad);
 
-    QAction *newAction = new QAction(tr("&New"), this);
-    newAction->setShortcut(QKeySequence::New);
-    newAction->setStatusTip(tr("create new project"));
-    connect(newAction, &QAction::triggered, this, &MainWindow::menuNew);
+    QAction* importPlainAction = new QAction(tr("&Import Plain Text from File"), this);
+    importPlainAction->setStatusTip(tr("import plain text from a text file"));
+    connect(importPlainAction, &QAction::triggered, this, &MainWindow::menuImportPlain);
+
+    QAction* importTagList = new QAction(tr("&Import Tag List from File"), this);
+    importTagList->setStatusTip(tr("import tag list from a file"));
+    connect(importTagList, &QAction::triggered, this, &MainWindow::menuImportTagList);
 
     m_actionExportPlain = new QAction(tr("&Export Plain Text to File"), this);
     m_actionExportPlain->setStatusTip("write plain text to a file");
     connect(m_actionExportPlain, &QAction::triggered, this, &MainWindow::menuExportPlain);
-
-    QAction* importPlainAction = new QAction(tr("&Import Plain Text from File"), this);
-    importPlainAction->setStatusTip(tr("import plain text from a text file"));
-    connect(importPlainAction, &QAction::triggered, this, &MainWindow::menuImportPlain);
 
     m_actionExportFinal = new QAction(tr("&Export Final Text to File"), this);
     m_actionExportFinal->setStatusTip(tr("write final text to file"));
@@ -219,10 +223,6 @@ void MainWindow::createMenus()
     m_actionExportTagList = new QAction(tr("&Export Tag List to File"), this);
     m_actionExportTagList->setStatusTip("write the tag list to a file");
     connect(m_actionExportTagList, &QAction::triggered, this, &MainWindow::menuExportTagList);
-
-    QAction* importTagList = new QAction(tr("&Import Tag List from File"), this);
-    importTagList->setStatusTip(tr("import tag list from a file"));
-    connect(importTagList, &QAction::triggered, this, &MainWindow::menuImportTagList);
 
     QAction *aboutAction = new QAction(tr("&About"), this);
     aboutAction->setStatusTip(tr("show about dialog"));
