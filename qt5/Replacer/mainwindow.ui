@@ -49,14 +49,14 @@
           <item>
            <widget class="QPushButton" name="pushButton_replace">
             <property name="text">
-             <string>Replace</string>
+             <string>&amp;Replace</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="pushButton_c2c_plain">
             <property name="text">
-             <string>To Clipboard</string>
+             <string>&amp;To Clipboard</string>
             </property>
            </widget>
           </item>
@@ -97,7 +97,7 @@
           <item>
            <widget class="QPushButton" name="pushButton_c2c_final">
             <property name="text">
-             <string>To Clipboard</string>
+             <string>To &amp;Clipboard</string>
             </property>
            </widget>
           </item>
