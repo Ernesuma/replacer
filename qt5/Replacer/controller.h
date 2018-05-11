@@ -28,6 +28,7 @@ public:
     // grant access to the raw pointer: USE WITH CARE!
     TagMapModel* GetTagMapModelRaw(){return m_pTagMapModel.get();};
 
+    // getter and setter
     void SetPlainText(const QString& plainText);
     const QString &GetPlainText() const;
     const QString &GetFinalText() const;
