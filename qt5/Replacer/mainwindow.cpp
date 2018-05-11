@@ -144,6 +144,10 @@ void MainWindow::menuExportPlain()
 void MainWindow::menuImportPlain()
 {
     qInfo() << "'clicked 'import plain'";
+    QDir importFilePath{QFileDialog::getOpenFileName(this, tr("Choose file to import from"))};
+    qInfo() << importFilePath.absolutePath();
+    m_controller.importPlain(importFilePath);
+    ui->textEdit_plain->setText(m_controller.GetPlainText());
 }
 
 void MainWindow::menuExportFinal()

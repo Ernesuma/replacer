@@ -1,5 +1,19 @@
 #include "controller.h"
 
+bool readFile2String(const QDir& path, QString& readText)
+{
+    bool retVal{false};
+    QFile data(path.path());
+    if (data.open(QFile::ReadOnly | QFile::Text))
+    {
+        QTextStream in(&data);
+        readText = in.readAll();
+        retVal = true;
+    }
+    data.close();
+    return retVal;
+}
+
 bool Controller::isTagMapEmpty() const
 {
     return m_pTagMapModel.get()->getTagMap().isEmpty();
@@ -45,4 +59,9 @@ bool Controller::replace()
     return rep.replace(this->GetPlainText(),
                         m_finalText,
                         m_pTagMapModel.get()->getTagMap());
+}
+
+bool Controller::importPlain(const QDir& path)
+{
+    return readFile2String(path, m_plainText);
 }

@@ -6,6 +6,8 @@
 #include <QtDebug>
 #include <QString>
 #include <QModelIndex>
+#include <QDir>
+#include <QFileDialog>
 //#include <QMap>
 //#include <memory>
 

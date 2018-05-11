@@ -6,6 +6,7 @@
 #include <QApplication>
 #include <QClipboard>
 #include <memory>
+#include <QDir>
 
 #include "tagmapmodel.h"
 #include "replacer.h"
@@ -36,6 +37,7 @@ public:
     bool isTagMapEmpty() const;
     bool RemoveTags(const QModelIndexList& rows);
     bool replace();
+    bool importPlain(const QDir &path);
 };
 
 #endif // CONTROLLER_H
