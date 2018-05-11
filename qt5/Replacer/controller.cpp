@@ -84,3 +84,8 @@ bool Controller::importPlain(const QDir& path)
 {
     return readFile2String(path, m_plainText);
 }
+
+bool Controller::exportFinal(QDir path) const
+{
+    return writeString2File(path, m_finalText);
+}

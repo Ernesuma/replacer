@@ -156,6 +156,18 @@ void MainWindow::menuImportPlain()
 void MainWindow::menuExportFinal()
 {
     qInfo() << "clicked 'export final'";
+    QString tmpStr = QFileDialog::getSaveFileName(this, tr("Choose file to export to"));
+    if (tmpStr.isNull())
+    {
+        // do nothing
+        qInfo() << "aborted file dialog";
+    }
+    else
+    {
+        QDir exportFilePath{QFileDialog::getSaveFileName(this, tr("Choose file to export to"))};
+        qInfo() << exportFilePath.absolutePath();
+        m_controller.exportFinal(exportFilePath);
+    }
 }
 
 void MainWindow::menuExportTagList()
