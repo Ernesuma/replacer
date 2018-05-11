@@ -139,6 +139,9 @@ void MainWindow::m_menuHelpAboutToShow()
 void MainWindow::menuExportPlain()
 {
     qInfo() << "clicked 'export plain'";
+    QDir exportFilePath{QFileDialog::getSaveFileName(this, tr("Choose file to export to"))};
+    qInfo() << exportFilePath.absolutePath();
+    m_controller.exportPlain(exportFilePath);
 }
 
 void MainWindow::menuImportPlain()
