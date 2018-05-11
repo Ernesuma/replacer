@@ -3,7 +3,7 @@
 bool readFile2String(const QDir& path, QString& readText)
 {
     bool retVal{false};
-    QFile data(path.path());
+    QFile data(path.absolutePath());
     if (data.open(QFile::ReadOnly | QFile::Text))
     {
         QTextStream in(&data);
