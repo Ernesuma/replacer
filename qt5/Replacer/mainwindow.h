@@ -8,6 +8,7 @@
 #include <QModelIndex>
 #include <QDir>
 #include <QFileDialog>
+#include <QMessageBox>
 //#include <QMap>
 //#include <memory>
 

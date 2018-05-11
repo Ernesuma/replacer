@@ -1,5 +1,14 @@
 #include "mainwindow.h"
 
+void infoMsgBox(const QString &info, const QString &info2=QString())
+{
+        QMessageBox msgBox;
+        msgBox.setIcon(QMessageBox::Information);
+        msgBox.setText(info);
+        msgBox.setInformativeText(info2);
+        msgBox.exec();
+}
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -145,6 +154,8 @@ void MainWindow::menuExportPlain()
         QDir exportFilePath{tmpStr};
         qInfo() << exportFilePath.absolutePath();
         m_controller.exportPlain(exportFilePath);
+
+        infoMsgBox("Exported plain text to:", exportFilePath.absolutePath());
     }
 }
 
@@ -158,6 +169,8 @@ void MainWindow::menuImportPlain()
         qInfo() << importFilePath.absolutePath();
         m_controller.importPlain(importFilePath);
         ui->textEdit_plain->setText(m_controller.GetPlainText());
+
+        infoMsgBox("Imported plain text from file:", importFilePath.absolutePath());
     }
 }
 
@@ -170,6 +183,8 @@ void MainWindow::menuExportFinal()
         QDir exportFilePath{tmpStr};
         qInfo() << exportFilePath.absolutePath();
         m_controller.exportFinal(exportFilePath);
+
+        infoMsgBox("Exported final text to file:", exportFilePath.absolutePath());
     }
 }
 
