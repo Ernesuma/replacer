@@ -191,7 +191,7 @@ void MainWindow::createMenus()
     // use tr(…) function to mark charecter acting as <Alt-…> keybinding
     // (Note that menuBar takes ownership of the new menu! -> No explicit deletion of m_menuMenu needed!)
     m_menuMenu = ui->menuBar->addMenu(tr("&Menu"));
-    m_menuData = ui->menuBar->addMenu(tr("&Date"));
+    m_menuData = ui->menuBar->addMenu(tr("&Data"));
     m_menuHelp = ui->menuBar->addMenu(tr("&Help"));
 
     // create "Exit" action
