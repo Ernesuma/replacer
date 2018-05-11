@@ -128,7 +128,7 @@ void MainWindow::m_menuDataAboutToShow()
     // disable export actions in the menu according to the availbility of the contents to export
     m_actionExportPlain->setDisabled(m_controller.GetPlainText().isEmpty());
     m_actionExportFinal->setDisabled(m_controller.GetFinalText().isEmpty());
-    m_actionExportTagList->setDisabled(m_controller.GetTagMapModelRaw()->getTagMap().isEmpty());
+    m_actionExportTagList->setDisabled(m_controller.isTagMapEmpty());
 }
 
 void MainWindow::m_menuHelpAboutToShow()

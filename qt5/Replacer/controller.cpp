@@ -1,5 +1,10 @@
 #include "controller.h"
 
+bool Controller::isTagMapEmpty() const
+{
+    return m_pTagMapModel.get()->getTagMap().isEmpty();
+}
+
 void Controller::SetPlainText(const QString& plainText)
 {
     m_plainText = plainText;

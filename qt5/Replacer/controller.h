@@ -33,6 +33,7 @@ public:
     const QString &Plain2Clipboard() const;
     const QString &Final2Clipboard() const;
 
+    bool isTagMapEmpty() const;
     bool RemoveTags(const QModelIndexList& rows);
     bool replace();
 };
