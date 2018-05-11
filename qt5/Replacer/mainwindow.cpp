@@ -139,32 +139,35 @@ void MainWindow::m_menuHelpAboutToShow()
 void MainWindow::menuExportPlain()
 {
     qInfo() << "clicked 'export plain'";
-    QDir exportFilePath{QFileDialog::getSaveFileName(this, tr("Choose file to export to"))};
-    qInfo() << exportFilePath.absolutePath();
-    m_controller.exportPlain(exportFilePath);
+    QString tmpStr = QFileDialog::getSaveFileName(this, tr("Choose file to export to"));
+    if (!tmpStr.isNull())
+    {
+        QDir exportFilePath{tmpStr};
+        qInfo() << exportFilePath.absolutePath();
+        m_controller.exportPlain(exportFilePath);
+    }
 }
 
 void MainWindow::menuImportPlain()
 {
     qInfo() << "'clicked 'import plain'";
-    QDir importFilePath{QFileDialog::getOpenFileName(this, tr("Choose file to import from"))};
-    qInfo() << importFilePath.absolutePath();
-    m_controller.importPlain(importFilePath);
-    ui->textEdit_plain->setText(m_controller.GetPlainText());
+    QString tmpStr{QFileDialog::getOpenFileName(this, tr("Choose file to import from"))};
+    if (!tmpStr.isNull())
+    {
+        QDir importFilePath{tmpStr};
+        qInfo() << importFilePath.absolutePath();
+        m_controller.importPlain(importFilePath);
+        ui->textEdit_plain->setText(m_controller.GetPlainText());
+    }
 }
 
 void MainWindow::menuExportFinal()
 {
     qInfo() << "clicked 'export final'";
     QString tmpStr = QFileDialog::getSaveFileName(this, tr("Choose file to export to"));
-    if (tmpStr.isNull())
+    if (!tmpStr.isNull())
     {
-        // do nothing
-        qInfo() << "aborted file dialog";
-    }
-    else
-    {
-        QDir exportFilePath{QFileDialog::getSaveFileName(this, tr("Choose file to export to"))};
+        QDir exportFilePath{tmpStr};
         qInfo() << exportFilePath.absolutePath();
         m_controller.exportFinal(exportFilePath);
     }
