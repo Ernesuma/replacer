@@ -9,8 +9,6 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QMessageBox>
-//#include <QMap>
-//#include <memory>
 
 #include "ui_mainwindow.h"
 #include "controller.h"

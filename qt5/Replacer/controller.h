@@ -37,11 +37,15 @@ public:
 
     bool isTagMapEmpty() const;
     bool RemoveTags(const QModelIndexList& rows);
+    bool RemoveAllTags();
     bool replace();
 
-    bool exportPlain(QDir path) const;
+    bool exportPlain(const QDir &path) const;
     bool importPlain(const QDir &path);
-    bool exportFinal(QDir path) const;
+    bool exportFinal(const QDir &path) const;
+
+    bool exportTagList(const QDir &path) const;
+    bool importTagList(const QDir &path);
 };
 
 #endif // CONTROLLER_H

@@ -2,11 +2,20 @@
 
 void infoMsgBox(const QString &info, const QString &info2=QString())
 {
-        QMessageBox msgBox;
-        msgBox.setIcon(QMessageBox::Information);
-        msgBox.setText(info);
-        msgBox.setInformativeText(info2);
-        msgBox.exec();
+    QMessageBox msgBox;
+    msgBox.setIcon(QMessageBox::Information);
+    msgBox.setText(info);
+    msgBox.setInformativeText(info2);
+    msgBox.exec();
+}
+
+void warnMsgBox(const QString &info, const QString &info2=QString())
+{
+    QMessageBox mBox;
+    mBox.setIcon(QMessageBox::Warning);
+    mBox.setText(info);
+    mBox.setInformativeText(info2);
+    mBox.exec();
 }
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -95,7 +104,10 @@ void MainWindow::on_pushButton_remove_tag_clicked()
     //qDebug() << "DEBUG: on_pushButton_remove_tag_clicked(): selection: " << rows;
     if (!rows.isEmpty())
     {
-        m_controller.RemoveTags(rows);
+        if (!m_controller.RemoveTags(rows))
+        {
+            qWarning() << "WARNING: could not remove tags";
+        }
     }
     ui->tableView->clearSelection();
 }
@@ -148,7 +160,7 @@ void MainWindow::m_menuHelpAboutToShow()
 void MainWindow::menuExportPlain()
 {
     qInfo() << "clicked 'export plain'";
-    QString tmpStr = QFileDialog::getSaveFileName(this, tr("Choose file to export to"));
+    QString tmpStr = QFileDialog::getSaveFileName(this, tr("Choose file to export  plain text to"));
     if (!tmpStr.isNull())
     {
         QDir exportFilePath{tmpStr};
@@ -162,7 +174,7 @@ void MainWindow::menuExportPlain()
 void MainWindow::menuImportPlain()
 {
     qInfo() << "'clicked 'import plain'";
-    QString tmpStr{QFileDialog::getOpenFileName(this, tr("Choose file to import from"))};
+    QString tmpStr{QFileDialog::getOpenFileName(this, tr("Choose file to import plain text from"))};
     if (!tmpStr.isNull())
     {
         QDir importFilePath{tmpStr};
@@ -177,7 +189,7 @@ void MainWindow::menuImportPlain()
 void MainWindow::menuExportFinal()
 {
     qInfo() << "clicked 'export final'";
-    QString tmpStr = QFileDialog::getSaveFileName(this, tr("Choose file to export to"));
+    QString tmpStr = QFileDialog::getSaveFileName(this, tr("Choose file to export final text to"));
     if (!tmpStr.isNull())
     {
         QDir exportFilePath{tmpStr};
@@ -191,11 +203,33 @@ void MainWindow::menuExportFinal()
 void MainWindow::menuExportTagList()
 {
     qInfo() << "clicked 'export tags'";
+    QString tmpStr = QFileDialog::getSaveFileName(this, tr("Choose file to export tag list to"));
+    if (!tmpStr.isNull())
+    {
+        QDir exportFilePath{tmpStr};
+        qInfo() << exportFilePath.absolutePath();
+        m_controller.exportTagList(exportFilePath);
+
+        infoMsgBox("Exported tag list to file:", exportFilePath.absolutePath());
+    }
 }
 
 void MainWindow::menuImportTagList()
 {
     qInfo() << "clicked 'import tags'";
+    QString tmpStr = QFileDialog::getOpenFileName(this, tr("Choose file to import tag list from"));
+    if (!tmpStr.isNull())
+    {
+        QDir importFilePath{tmpStr};
+        if (m_controller.importTagList(importFilePath))
+        {
+            infoMsgBox("Imported tag list from file:", importFilePath.absolutePath());
+        }
+        else
+        {
+            warnMsgBox("Failed to import file:", importFilePath.absolutePath());
+        }
+    }
 }
 
 void MainWindow::menuAbout()
