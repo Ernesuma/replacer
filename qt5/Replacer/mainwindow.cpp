@@ -151,7 +151,7 @@ void MainWindow::m_menuHelpAboutToShow()
 void MainWindow::menuExportPlain()
 {
     qInfo() << "clicked 'export plain'";
-    QString tmpStr = QFileDialog::getSaveFileName(this, tr("Choose file to export to"));
+    QString tmpStr = QFileDialog::getSaveFileName(this, tr("Choose file to export  plain text to"));
     if (!tmpStr.isNull())
     {
         QDir exportFilePath{tmpStr};
@@ -165,7 +165,7 @@ void MainWindow::menuExportPlain()
 void MainWindow::menuImportPlain()
 {
     qInfo() << "'clicked 'import plain'";
-    QString tmpStr{QFileDialog::getOpenFileName(this, tr("Choose file to import from"))};
+    QString tmpStr{QFileDialog::getOpenFileName(this, tr("Choose file to import plain text from"))};
     if (!tmpStr.isNull())
     {
         QDir importFilePath{tmpStr};
@@ -180,7 +180,7 @@ void MainWindow::menuImportPlain()
 void MainWindow::menuExportFinal()
 {
     qInfo() << "clicked 'export final'";
-    QString tmpStr = QFileDialog::getSaveFileName(this, tr("Choose file to export to"));
+    QString tmpStr = QFileDialog::getSaveFileName(this, tr("Choose file to export final text to"));
     if (!tmpStr.isNull())
     {
         QDir exportFilePath{tmpStr};
