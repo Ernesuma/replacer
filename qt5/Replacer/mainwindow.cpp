@@ -95,7 +95,10 @@ void MainWindow::on_pushButton_remove_tag_clicked()
     //qDebug() << "DEBUG: on_pushButton_remove_tag_clicked(): selection: " << rows;
     if (!rows.isEmpty())
     {
-        m_controller.RemoveTags(rows);
+        if (!m_controller.RemoveTags(rows))
+        {
+            qWarning() << "WARNING: could not remove tags";
+        }
     }
     ui->tableView->clearSelection();
 }

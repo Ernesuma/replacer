@@ -64,7 +64,7 @@ const QString &Controller::Final2Clipboard() const
 
 bool Controller::RemoveTags(const QModelIndexList &rows)
 {
-    m_pTagMapModel.get()->removeRows(rows);
+    return m_pTagMapModel.get()->removeRows(rows);
 }
 
 bool Controller::replace()
