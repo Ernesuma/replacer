@@ -37,6 +37,7 @@ public:
 
     bool isTagMapEmpty() const;
     bool RemoveTags(const QModelIndexList& rows);
+    bool RemoveAllTags();
     bool replace();
 
     bool exportPlain(const QDir &path) const;

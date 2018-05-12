@@ -46,6 +46,7 @@ public:
     // own methods to add and remove values with custom parameters
     bool insert(const tagMapKey& key, const tagMapValue& value);
     bool removeRows(const QModelIndexList rows);
+    bool removeAllRows();
 
     // getter to access the map as const reference
     const tagMap& getTagMap() const {return m_map;};

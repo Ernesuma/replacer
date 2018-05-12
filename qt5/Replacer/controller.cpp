@@ -87,6 +87,11 @@ bool Controller::RemoveTags(const QModelIndexList &rows)
     return m_pTagMapModel.get()->removeRows(rows);
 }
 
+bool Controller::RemoveAllTags()
+{
+    return m_pTagMapModel.get()->removeAllRows();
+}
+
 bool Controller::replace()
 {
     Replacer rep{};

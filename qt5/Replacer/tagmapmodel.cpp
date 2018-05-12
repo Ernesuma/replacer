@@ -213,3 +213,13 @@ bool TagMapModel::removeRows(const QModelIndexList rows)
     }
     return true;
 }
+
+bool TagMapModel::removeAllRows()
+{
+    const int rows{m_map.size()};
+    for (int row=rows-1; row >=0; --row)
+    {
+        this->removeRow(row);
+    }
+    return true;
+}
