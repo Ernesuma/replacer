@@ -28,6 +28,26 @@ bool writeString2File(const QDir& path, const QString& writeText)
     return retVal;
 }
 
+bool writeTagMap2File(const QDir& path, const tagMap &tags)
+{
+    bool retVal{false};
+
+    QFile data(path.absolutePath());
+    if (data.open(QFile::WriteOnly | QFile::Text))
+    {
+        QTextStream out(&data);
+
+        auto keys{tags.uniqueKeys()};
+        foreach (auto key, keys)
+        {
+            out << key << "," << tags[key] << "\n";
+        }
+        retVal = true;
+    }
+    data.close();
+    return retVal;
+}
+
 bool Controller::isTagMapEmpty() const
 {
     return m_pTagMapModel.get()->getTagMap().isEmpty();
@@ -88,4 +108,9 @@ bool Controller::importPlain(const QDir& path)
 bool Controller::exportFinal(QDir path) const
 {
     return writeString2File(path, m_finalText);
+}
+
+bool Controller::exportTagList(const QDir &path) const
+{
+    return writeTagMap2File(path, m_pTagMapModel.get()->getTagMap());
 }

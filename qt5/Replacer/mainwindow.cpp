@@ -194,6 +194,15 @@ void MainWindow::menuExportFinal()
 void MainWindow::menuExportTagList()
 {
     qInfo() << "clicked 'export tags'";
+    QString tmpStr = QFileDialog::getSaveFileName(this, tr("Choose file to export tag list to"));
+    if (!tmpStr.isNull())
+    {
+        QDir exportFilePath{tmpStr};
+        qInfo() << exportFilePath.absolutePath();
+        m_controller.exportTagList(exportFilePath);
+
+        infoMsgBox("Exported tag list to file:", exportFilePath.absolutePath());
+    }
 }
 
 void MainWindow::menuImportTagList()

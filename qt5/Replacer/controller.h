@@ -42,6 +42,8 @@ public:
     bool exportPlain(QDir path) const;
     bool importPlain(const QDir &path);
     bool exportFinal(QDir path) const;
+
+    bool exportTagList(const QDir &path) const;
 };
 
 #endif // CONTROLLER_H
