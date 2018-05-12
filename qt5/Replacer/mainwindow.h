@@ -35,6 +35,7 @@ private slots:
 
     void on_pushButton_add_2_tag_list_clicked();
     void on_pushButton_remove_tag_clicked();
+    void on_pushButton_remove_all_tags_clicked();
 
     // slots for menu 'Menu'
     void menuNew();

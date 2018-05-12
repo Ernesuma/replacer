@@ -112,6 +112,22 @@ void MainWindow::on_pushButton_remove_tag_clicked()
     ui->tableView->clearSelection();
 }
 
+void MainWindow::on_pushButton_remove_all_tags_clicked()
+{
+    QMessageBox mBox;
+    mBox.setText("Do you really want to delete all tags?");
+    mBox.setInformativeText("Click 'OK' to delete all tags.");
+    mBox.setIcon(QMessageBox::Question);
+    mBox.setStandardButtons(QMessageBox::Abort | QMessageBox::Ok);
+    mBox.setDefaultButton(QMessageBox::Abort);
+    int retVal = mBox.exec();
+    if (QMessageBox::Ok == retVal)
+    {
+        m_controller.RemoveAllTags();
+        ui->tableView->clearSelection();
+    }
+}
+
 void MainWindow::menuNew()
 {
     qInfo() << "clicked 'New'";
