@@ -2,11 +2,20 @@
 
 void infoMsgBox(const QString &info, const QString &info2=QString())
 {
-        QMessageBox msgBox;
-        msgBox.setIcon(QMessageBox::Information);
-        msgBox.setText(info);
-        msgBox.setInformativeText(info2);
-        msgBox.exec();
+    QMessageBox msgBox;
+    msgBox.setIcon(QMessageBox::Information);
+    msgBox.setText(info);
+    msgBox.setInformativeText(info2);
+    msgBox.exec();
+}
+
+void warnMsgBox(const QString &info, const QString &info2=QString())
+{
+    QMessageBox mBox;
+    mBox.setIcon(QMessageBox::Warning);
+    mBox.setText(info);
+    mBox.setInformativeText(info2);
+    mBox.exec();
 }
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -208,6 +217,19 @@ void MainWindow::menuExportTagList()
 void MainWindow::menuImportTagList()
 {
     qInfo() << "clicked 'import tags'";
+    QString tmpStr = QFileDialog::getOpenFileName(this, tr("Choose file to import tag list from"));
+    if (!tmpStr.isNull())
+    {
+        QDir importFilePath{tmpStr};
+        if (m_controller.importTagList(importFilePath))
+        {
+            infoMsgBox("Imported tag list from file:", importFilePath.absolutePath());
+        }
+        else
+        {
+            warnMsgBox("Failed to import file:", importFilePath.absolutePath());
+        }
+    }
 }
 
 void MainWindow::menuAbout()

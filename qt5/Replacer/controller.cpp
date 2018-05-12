@@ -48,6 +48,37 @@ bool writeTagMap2File(const QDir& path, const tagMap &tags)
     return retVal;
 }
 
+bool readFile2TagMap(const QDir &path, tagMap &tags)
+{
+    bool retVal{false};
+
+    QFile data(path.absolutePath());
+    if (data.open(QFile::ReadOnly | QFile::Text))
+    {
+        QTextStream in(&data);
+
+        QString row{};
+        retVal = true;
+        while (!in.atEnd())
+        {
+            in.readLineInto(&row);
+            QStringList rowList = row.split(",");
+            qInfo() << rowList;
+            if (2 == rowList.size())
+            {
+                tags[rowList[0]] = rowList[1];
+            }
+            else
+            {
+                qWarning() << "WARNING: invalid tag list file to import";
+                retVal = false;
+                break;
+            }
+        }
+    }
+    return retVal;
+}
+
 bool Controller::isTagMapEmpty() const
 {
     return m_pTagMapModel.get()->getTagMap().isEmpty();
@@ -118,4 +149,19 @@ bool Controller::exportFinal(const QDir &path) const
 bool Controller::exportTagList(const QDir &path) const
 {
     return writeTagMap2File(path, m_pTagMapModel.get()->getTagMap());
+}
+
+bool Controller::importTagList(const QDir &path)
+{
+    tagMap tmp{};
+    bool retVal = readFile2TagMap(path, tmp);
+    if (retVal)
+    {
+        this->RemoveAllTags();
+        foreach(auto key, tmp.uniqueKeys())
+        {
+            m_pTagMapModel.get()->insert(key, tmp[key]);
+        }
+    }
+    return retVal;
 }
