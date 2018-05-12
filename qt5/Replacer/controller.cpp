@@ -95,7 +95,7 @@ bool Controller::replace()
                         m_pTagMapModel.get()->getTagMap());
 }
 
-bool Controller::exportPlain(QDir path) const
+bool Controller::exportPlain(const QDir &path) const
 {
     return writeString2File(path, m_plainText);
 }
@@ -105,7 +105,7 @@ bool Controller::importPlain(const QDir& path)
     return readFile2String(path, m_plainText);
 }
 
-bool Controller::exportFinal(QDir path) const
+bool Controller::exportFinal(const QDir &path) const
 {
     return writeString2File(path, m_finalText);
 }
