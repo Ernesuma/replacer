@@ -1,6 +1,6 @@
 #include "replacer.h"
 
-bool Replacer::replace(const QString &plain, QString &final, const tagMap &tags)
+bool Replacer::replace(const QString &plain, QString &final, const tagMap &tags) const
 {
     // get std::string to work on with regular expressions
     std::string finalStd{plain.toStdString()};
