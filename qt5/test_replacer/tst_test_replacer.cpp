@@ -9,13 +9,16 @@
  */
 class test_replacer : public QObject
 {
+    // neccessary because of QObject is superclass
     Q_OBJECT
 
 public:
+    // constructor and destructor
     test_replacer();
     ~test_replacer();
 
 private slots:
+    // every test case has to be a private slot of the test suite class
     void test_toMuchTags();
     void test_simpleReplace();
     void test_tagsMissing();
@@ -25,35 +28,43 @@ private slots:
 // implementation of constructor
 test_replacer::test_replacer()
 {
-
+    // nothing to do here
 }
 
 // implementation of destructor
 test_replacer::~test_replacer()
 {
-
+    // nothing to do here
 }
+
 
 /*
  * test how the replacer handles a big amount of tags in the tagMap
  */
 void test_replacer::test_toMuchTags()
 {
+    // create a tag map instance and fill with a big amount of key/value pairs
     tagMap tags = tagMap();
     const int iMax = 1e6;
     for (int i = 0; i<iMax; ++i)
     {
         tags[QString("tag_") + QString::number(i)] = QString("value_") + QString::number(i);
     }
+    // check for the correct amount of map entries
     QCOMPARE(tags.size(), iMax);
 
+    // declare and define plain and finalt text strings
     QString plainText = QString(">>{tag_123}<<");
     QString finalText = QString("");
 
+    // call replacer on plain text; save result in final text
     Replacer rep;
     bool res = rep.replace(plainText, finalText, tags);
 
+    // check return value of replacer
     QCOMPARE(res, true);
+
+    // check final text to contain correct replacements
     QCOMPARE(finalText, QString(">>value_123<<"));
 }
 
