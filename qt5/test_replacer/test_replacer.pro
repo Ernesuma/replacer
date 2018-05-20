@@ -6,7 +6,8 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-SOURCES +=  tst_test_replacer.cpp
+SOURCES += \ 
+    tst_replacer.cpp
 
 HEADERS +=
 
