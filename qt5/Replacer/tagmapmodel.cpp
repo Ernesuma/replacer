@@ -161,7 +161,7 @@ bool TagMapModel::insert(const tagMapKey &key, const tagMapValue &value)
     }
     m_newKey = key;
     m_newValue = value;
-    this->insertRow(counter);
+    return this->insertRow(counter);
 }
 
 bool TagMapModel::removeRows(int row, int count, const QModelIndex &parent)
