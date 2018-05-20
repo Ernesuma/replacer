@@ -11,5 +11,5 @@ SOURCES += \
 
 HEADERS +=
 
-INCLUDEPATH += ../Replacer/
-include(../Replacer/Replacer.pri)
+INCLUDEPATH += $$PWD/../Replacer/
+include($$PWD/../Replacer/Replacer.pri)
