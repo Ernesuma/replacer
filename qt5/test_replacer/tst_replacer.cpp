@@ -1,11 +1,10 @@
-#include <QtTest>
-
 // add necessary includes here
+#include <QtTest/QtTest>
 #include "tagmapmodel.h"
 #include "replacer.h"
 
 /*
- * test suite to test the class replacer
+ * test case to test the class replacer
  */
 class test_replacer : public QObject
 {
@@ -18,25 +17,28 @@ public:
     ~test_replacer();
 
 private slots:
-    // every test case has to be a private slot of the test suite class
+    // every test has to be a private slot of the test case class
     void test_toMuchTags();
     void test_simpleReplace();
     void test_tagsMissing();
     void test_caseSensitivity();
 };
 
-// implementation of constructor
+/*
+ * implementation of constructor
+ */
 test_replacer::test_replacer()
 {
     // nothing to do here
 }
 
-// implementation of destructor
+/*
+ * implementation of destructor
+ */
 test_replacer::~test_replacer()
 {
     // nothing to do here
 }
-
 
 /*
  * test how the replacer handles a big amount of tags in the tagMap
