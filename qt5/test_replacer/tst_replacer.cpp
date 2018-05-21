@@ -51,44 +51,53 @@ void test_replacer::test_toMuchTags()
  */
 void test_replacer::test_simpleReplace()
 {
+    // define a plain text with some replace tags
     QString plainText{"Hallo {name},\nwie geht es Dir und {name2}?"};
 
+    // create a tag map with a entry for every tag in the plain text
     tagMap tags = tagMap();
     tags[QString("name2")] = "Elsa";
     tags[QString("name")] = QString("Peter");
     QCOMPARE(tags.size(), 2);
 
+    // call replacer to replace tags in plain text and get the final text
     Replacer rep;
     QString finalText{""};
     bool res = rep.replace(plainText, finalText, tags);
 
+    // check return value of replacer and the final text
     QCOMPARE(res, true);
     QCOMPARE(finalText, QString("Hallo Peter,\nwie geht es Dir und Elsa?"));
 }
 
 /*
- * tags missing
+ * test how the replacer handles missing tags
  */
 void test_replacer::test_tagsMissing()
 {
+    // create a tag map with one entry
     tagMap tags = tagMap();
     tags["myGreatTag"] = QString("myGreatValue");
 
+    // plain text with two tags
     QString plainText{QString("This is {myGreatTag}. It will be replaced. But this {secondTag} has no tag in the tagMap ;( ")};
-    QString finalText{""};
 
+    // call replacer to get final text
     Replacer rep;
+    QString finalText{""};
     bool returnValue = rep.replace(plainText, finalText, tags);
 
+    // check replacer return value and final text
     QCOMPARE(returnValue, true);
     QCOMPARE(finalText, QString("This is myGreatValue. It will be replaced. But this {secondTag} has no tag in the tagMap ;( "));
 }
 
 /*
- * case sensitivity
+ * test correct lower and upper case handling of replacer
  */
 void test_replacer::test_caseSensitivity()
 {
+    // create tag map with lower und upper cased tags
     tagMap tags = tagMap();
     tags[QString("lower")] = QString("lowerValue");
     tags[QString("mIXeD")] = QString("mixedValue");
@@ -98,17 +107,20 @@ void test_replacer::test_caseSensitivity()
     tags[QString("tEsT")] = QString("mixedTest");
     tags[QString("TEST")] = QString("upperTest");
 
+    // create plain text to test the lower and upper case tags
     QString plainText{QString("1.) {TEST}\n2.) {test}\n3.) {mIXeD}\n4.) {UPPER}\n5.) {tEsT}")};
-    const QString expectedText{QString("1.) upperTest\n2.) lowerTest\n3.) mixedValue\n4.) upperValue\n5.) mixedTest")};
-    QString finalText{QString("")};
 
+    // define the expected final text
+    const QString expectedText{QString("1.) upperTest\n2.) lowerTest\n3.) mixedValue\n4.) upperValue\n5.) mixedTest")};
+
+    // use replacer to get final text
     Replacer rep;
+    QString finalText{QString("")};
     bool retVal = rep.replace(plainText, finalText, tags);
 
+    // check replacer return value and final text
     QCOMPARE(retVal, true);
     QCOMPARE(finalText, expectedText);
-
-
 }
 
 // mandatory code to let the QTests run
