@@ -9,7 +9,8 @@ TEMPLATE = app
 SOURCES += \ 
     tst_replacer.cpp
 
-HEADERS +=
+HEADERS += \
+    tst_replacer.h
 
 INCLUDEPATH += $$PWD/../Replacer/
 include($$PWD/../Replacer/Replacer.pri)

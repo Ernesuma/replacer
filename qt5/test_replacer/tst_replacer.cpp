@@ -1,28 +1,4 @@
-// add necessary includes here
-#include <QtTest/QtTest>
-#include "tagmapmodel.h"
-#include "replacer.h"
-
-/*
- * test case to test the class replacer
- */
-class test_replacer : public QObject
-{
-    // neccessary because of QObject is superclass
-    Q_OBJECT
-
-public:
-    // constructor and destructor
-    test_replacer();
-    ~test_replacer();
-
-private slots:
-    // every test has to be a private slot of the test case class
-    void test_toMuchTags();
-    void test_simpleReplace();
-    void test_tagsMissing();
-    void test_caseSensitivity();
-};
+#include"tst_replacer.h"
 
 /*
  * implementation of constructor
@@ -137,4 +113,6 @@ void test_replacer::test_caseSensitivity()
 
 // mandatory code to let the QTests run
 QTEST_APPLESS_MAIN(test_replacer)
-#include "tst_test_replacer.moc"
+
+// just needed when class declaration and implementation is in one cpp file:
+//#include "tst_test_replacer.moc"
