@@ -131,6 +131,14 @@ bool Controller::replace()
                         m_pTagMapModel.get()->getTagMap());
 }
 
+bool Controller::saveProject(const QDir &path) const
+{
+    bool returnValue{false};
+
+
+    return returnValue;
+}
+
 bool Controller::exportPlain(const QDir &path) const
 {
     return writeString2File(path, m_plainText);

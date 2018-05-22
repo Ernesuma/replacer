@@ -40,6 +40,8 @@ public:
     bool RemoveAllTags();
     bool replace();
 
+    bool saveProject(const QDir &path) const;
+
     bool exportPlain(const QDir &path) const;
     bool importPlain(const QDir &path);
     bool exportFinal(const QDir &path) const;

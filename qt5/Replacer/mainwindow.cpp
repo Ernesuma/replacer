@@ -146,6 +146,15 @@ void MainWindow::menuSave()
 void MainWindow::menuSaveAs()
 {
     qInfo() << "clicked 'Save As'";
+    QString tmpStr = QFileDialog::getExistingDirectory(this, tr("Choose directory to save this project to"));
+    if (!tmpStr.isNull())
+    {
+        QDir saveFilePath{tmpStr};
+        qInfo() << saveFilePath.absolutePath();
+        m_controller.saveProject(saveFilePath);
+
+        infoMsgBox("saved project to:", saveFilePath.absolutePath());
+    }
 }
 
 void MainWindow::menuExit()
