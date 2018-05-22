@@ -176,7 +176,7 @@ void MainWindow::m_menuHelpAboutToShow()
 void MainWindow::menuExportPlain()
 {
     qInfo() << "clicked 'export plain'";
-    QString tmpStr = QFileDialog::getSaveFileName(this, tr("Choose file to export  plain text to"));
+    QString tmpStr = QFileDialog::getSaveFileName(this, tr("Choose file to export plain text to"));
     if (!tmpStr.isNull())
     {
         QDir exportFilePath{tmpStr};
