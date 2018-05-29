@@ -84,6 +84,11 @@ bool Controller::isTagMapEmpty() const
     return m_pTagMapModel.get()->getTagMap().isEmpty();
 }
 
+bool Controller::isProjectSet() const
+{
+    return m_project.isSet();
+}
+
 void Controller::SetPlainText(const QString& plainText)
 {
     m_plainText = plainText;

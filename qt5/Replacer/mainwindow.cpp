@@ -165,6 +165,8 @@ void MainWindow::menuExit()
 void MainWindow::m_menuMenuAboutToShow()
 {
     qDebug() << "m_menuMenuAboutToShow()";
+
+    m_actionSave->setEnabled(m_controller.isProjectSet());
 }
 
 void MainWindow::m_menuDataAboutToShow()
@@ -285,10 +287,10 @@ void MainWindow::createMenus()
     newAction->setStatusTip(tr("create new project"));
     connect(newAction, &QAction::triggered, this, &MainWindow::menuNew);
 
-    QAction *saveAction = new QAction(tr("&Save"), this);
-    saveAction->setShortcut(QKeySequence::Save);
-    saveAction->setStatusTip(tr("save project"));
-    connect(saveAction, &QAction::triggered, this, &MainWindow::menuSave);
+    m_actionSave = new QAction(tr("&Save"), this);
+    m_actionSave->setShortcut(QKeySequence::Save);
+    m_actionSave->setStatusTip(tr("save project"));
+    connect(m_actionSave, &QAction::triggered, this, &MainWindow::menuSave);
 
     QAction *saveAsAction = new QAction(tr("Save &As"), this);
     saveAsAction->setShortcut(QKeySequence::SaveAs);
@@ -328,7 +330,7 @@ void MainWindow::createMenus()
     // the QMenu::addAction takes ownership of the returned QAction
     m_menuMenu->addAction(newAction);
     m_menuMenu->addAction(loadAction);
-    m_menuMenu->addAction(saveAction);
+    m_menuMenu->addAction(m_actionSave);
     m_menuMenu->addAction(saveAsAction);
     m_menuMenu->addSeparator();
     m_menuMenu->addAction(exitAction);

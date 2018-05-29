@@ -10,6 +10,8 @@
 
 #include "tagmapmodel.h"
 #include "replacer.h"
+#include "project.h"
+
 
 class Controller
 {
@@ -18,6 +20,7 @@ private:
     QString m_plainText{""};
     QString m_finalText{""};
     std::unique_ptr<TagMapModel> m_pTagMapModel{new TagMapModel()};
+    Project m_project{Project()};
 
 public:
     // constructor
@@ -36,10 +39,12 @@ public:
     const QString &Final2Clipboard() const;
 
     bool isTagMapEmpty() const;
+    bool isProjectSet() const;
     bool RemoveTags(const QModelIndexList& rows);
     bool RemoveAllTags();
     bool replace();
 
+    bool newProject(const QDir& path);
     bool saveProject(const QDir &path) const;
 
     bool exportPlain(const QDir &path) const;
