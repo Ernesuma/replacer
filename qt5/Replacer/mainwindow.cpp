@@ -18,6 +18,16 @@ void warnMsgBox(const QString &info, const QString &info2=QString())
     mBox.exec();
 }
 
+bool reallyAllNew(QWidget* parent, const QString& title, const QString &info)
+{
+    int ret = QMessageBox::warning(parent, title, info,
+                                 QMessageBox::Cancel | QMessageBox::Ok,
+                                 QMessageBox::Cancel);
+    if (QMessageBox::Ok == ret)
+        return true;
+    return false;
+}
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -131,6 +141,18 @@ void MainWindow::on_pushButton_remove_all_tags_clicked()
 void MainWindow::menuNew()
 {
     qInfo() << "clicked 'New'";
+    if (!(m_controller.isTagMapEmpty() &
+          m_controller.GetPlainText().isEmpty() &
+          m_controller.GetFinalText().isEmpty()))
+    {
+        QString title{QString("New Project")};
+        QString info{QString("Do you really want to create a new project?\nAll unsaved changes will be lost…")};
+        if (!reallyAllNew(this, title, info))
+        {
+            return;
+        }
+    }
+    qInfo() << "open new dialog";
 }
 
 void MainWindow::menuLoad()
