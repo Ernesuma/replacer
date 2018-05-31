@@ -53,6 +53,8 @@ public:
 
     bool exportTagList(const QDir &path) const;
     bool importTagList(const QDir &path);
+
+    void clear();
 };
 
 #endif // CONTROLLER_H

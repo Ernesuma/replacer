@@ -178,3 +178,10 @@ bool Controller::importTagList(const QDir &path)
     }
     return retVal;
 }
+
+void Controller::clear()
+{
+    RemoveAllTags();
+    SetPlainText("");
+    m_finalText = QString("");
+}
