@@ -140,7 +140,11 @@ void MainWindow::on_pushButton_remove_all_tags_clicked()
 
 void MainWindow::menuNew()
 {
+    // debug info
     qInfo() << "clicked 'New'";
+
+    // if there is some text or some tags:
+    // ask user for confirmation to clear everything
     if (!(m_controller.isTagMapEmpty() &
           m_controller.GetPlainText().isEmpty() &
           m_controller.GetFinalText().isEmpty()))
@@ -149,10 +153,16 @@ void MainWindow::menuNew()
         QString info{QString("Do you really want to create a new project?\nAll unsaved changes will be lost…")};
         if (!reallyAllNew(this, title, info))
         {
+            // abort creation of new menu
             return;
         }
     }
-    qInfo() << "open new dialog";
+    // clear all texts and tags
+    ui->textEdit_plain->setText("");
+    ui->textEdit_final->setText("");
+    m_controller.clear();
+
+    // open new project dialog
 }
 
 void MainWindow::menuLoad()
