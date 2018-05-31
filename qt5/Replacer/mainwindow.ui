@@ -195,7 +195,7 @@
              <item>
               <widget class="QPushButton" name="pushButton_add_2_tag_list">
                <property name="text">
-                <string>Add to Tag List</string>
+                <string>Add to Tag &amp;List</string>
                </property>
               </widget>
              </item>
@@ -263,14 +263,14 @@
           <item>
            <widget class="QPushButton" name="pushButton_remove_tag">
             <property name="text">
-             <string>Remove Selected</string>
+             <string>Remove &amp;Selected</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="pushButton_remove_all_tags">
             <property name="text">
-             <string>Remove All</string>
+             <string>Remove &amp;All</string>
             </property>
            </widget>
           </item>
