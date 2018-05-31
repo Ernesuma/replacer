@@ -31,6 +31,7 @@ HEADERS += \
         mainwindow.h \
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+        dialognew.ui
 
 include(Replacer.pri)
