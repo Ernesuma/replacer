@@ -163,6 +163,11 @@ void MainWindow::menuNew()
     m_controller.clear();
 
     // open new project dialog
+    qDebug() << "1";
+    DialogNew dn(this);
+    qDebug() << "2";
+    auto retVal = dn.exec();
+    qDebug() << "3: " << retVal;
 }
 
 void MainWindow::menuLoad()
