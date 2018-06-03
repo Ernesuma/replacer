@@ -31,7 +31,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="lineEdit">
+    <widget class="QLineEdit" name="lineEdit_proName">
      <property name="text">
       <string/>
      </property>
@@ -50,7 +50,10 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLineEdit" name="lineEdit_2">
+      <widget class="QLineEdit" name="lineEdit_proDir">
+       <property name="focusPolicy">
+        <enum>Qt::ClickFocus</enum>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -99,6 +102,10 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit_proName</tabstop>
+  <tabstop>toolButton</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

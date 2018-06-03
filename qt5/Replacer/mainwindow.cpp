@@ -166,8 +166,11 @@ void MainWindow::menuNew()
     qDebug() << "1";
     DialogNew dn(this);
     qDebug() << "2";
-    auto retVal = dn.exec();
-    qDebug() << "3: " << retVal;
+    dn.exec();
+    qDebug() << "3";
+    qInfo() << "was cancelled: " << dn.wasCancelled();
+    qInfo() << "projName: " << dn.getProjectName();
+    qInfo() << "projDir: " << dn.getProjectDir();
 }
 
 void MainWindow::menuLoad()

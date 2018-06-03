@@ -18,13 +18,15 @@ void DialogNew::on_toolButton_clicked()
     if (!tmpStr.isNull())
     {
         QDir saveFilePath{tmpStr};
-        m_projectDir = saveFilePath.absolutePath();
+        QString proDir = saveFilePath.absolutePath();
         //qInfo() << m_projectDir << " " << m_projectDir.path();
-        m_pDialogNew->lineEdit_2->setText(m_projectDir.path());
+        m_pDialogNew->lineEdit_proDir->setText(proDir);
     }
 }
 
 void DialogNew::on_buttonBox_accepted()
 {
-    //TODO: do some checks here
+    m_projectName = m_pDialogNew->lineEdit_proName->text();
+    m_projectDir = QDir(m_pDialogNew->lineEdit_proDir->text());
+    m_cancelled = false;
 }
