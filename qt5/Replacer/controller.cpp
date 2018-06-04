@@ -84,11 +84,6 @@ bool Controller::isTagMapEmpty() const
     return m_pTagMapModel.get()->getTagMap().isEmpty();
 }
 
-bool Controller::isProjectSet() const
-{
-    return m_project.isSet();
-}
-
 void Controller::SetPlainText(const QString& plainText)
 {
     m_plainText = plainText;
@@ -134,6 +129,21 @@ bool Controller::replace()
     return rep.replace(this->GetPlainText(),
                         m_finalText,
                         m_pTagMapModel.get()->getTagMap());
+}
+
+bool Controller::isValidProjectName(const QString &name) const
+{
+    return Project::isValidName(name);
+}
+
+bool Controller::isProjectSet() const
+{
+    return m_project.isSet();
+}
+
+bool Controller::newProject(const QString &name, const QDir &path)
+{
+    m_project.set(name, path);
 }
 
 bool Controller::saveProject(const QDir &path) const

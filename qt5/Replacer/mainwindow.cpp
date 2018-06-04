@@ -171,6 +171,36 @@ void MainWindow::menuNew()
     qInfo() << "was cancelled: " << dn.wasCancelled();
     qInfo() << "projName: " << dn.getProjectName();
     qInfo() << "projDir: " << dn.getProjectDir();
+
+    if (dn.wasCancelled())
+    {
+        // nothing to do
+    }
+    else
+    {
+        // make some checks with name and path
+        const auto name = dn.getProjectName();
+        const auto path = dn.getProjectDir();
+        // is name empty?
+        if (name.isEmpty())
+        {
+            warnMsgBox("ERROR: Creation of new project aborted:", "No project name provided!");
+        }
+        // as name valid?
+        else if (!m_controller.isValidProjectName(name))
+        {
+            warnMsgBox("ERROR: Creation of new project aborted. No valid project name:", name);
+        }
+        else if(!path.exists())
+        {
+            warnMsgBox("ERROR: provided path does not exist:", path.path());
+        }
+        else
+        {
+            // set the new project as active project
+            m_controller.newProject(name, path);
+        }
+    }
 }
 
 void MainWindow::menuLoad()
