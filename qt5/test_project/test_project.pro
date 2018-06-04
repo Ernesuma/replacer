@@ -1,18 +1,21 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2018-04-27T02:12:26
+# Project created by QtCreator 2018-06-04T02:30:05
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += testlib widgets
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT       -= gui
 
-TARGET = Replacer
+TARGET = tst_test_project
+CONFIG   += console
+CONFIG   -= app_bundle
+
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
-# any feature of Qt which as been marked as deprecated (the exact warnings
+# any feature of Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
@@ -24,16 +27,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
-    dialognew.cpp
+        tst_test_project.cpp 
 
-HEADERS += \
-        mainwindow.h \
-    dialognew.h
+DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
-FORMS += \
-        mainwindow.ui \
-        dialognew.ui
-
-include(Replacer.pri)
+INCLUDEPATH += $$PWD/../Replacer/
+include($$PWD/../Replacer/Replacer.pri)

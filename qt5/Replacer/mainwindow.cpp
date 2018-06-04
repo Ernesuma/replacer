@@ -18,6 +18,16 @@ void warnMsgBox(const QString &info, const QString &info2=QString())
     mBox.exec();
 }
 
+bool reallyAllNew(QWidget* parent, const QString& title, const QString &info)
+{
+    int ret = QMessageBox::warning(parent, title, info,
+                                 QMessageBox::Cancel | QMessageBox::Ok,
+                                 QMessageBox::Cancel);
+    if (QMessageBox::Ok == ret)
+        return true;
+    return false;
+}
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -130,7 +140,67 @@ void MainWindow::on_pushButton_remove_all_tags_clicked()
 
 void MainWindow::menuNew()
 {
+    // debug info
     qInfo() << "clicked 'New'";
+
+    // if there is some text or some tags:
+    // ask user for confirmation to clear everything
+    if (!(m_controller.isTagMapEmpty() &
+          m_controller.GetPlainText().isEmpty() &
+          m_controller.GetFinalText().isEmpty()))
+    {
+        QString title{QString("New Project")};
+        QString info{QString("Do you really want to create a new project?\nAll unsaved changes will be lost…")};
+        if (!reallyAllNew(this, title, info))
+        {
+            // abort creation of new menu
+            return;
+        }
+    }
+    // clear all texts and tags
+    ui->textEdit_plain->setText("");
+    ui->textEdit_final->setText("");
+    m_controller.clear();
+
+    // open new project dialog
+    qDebug() << "1";
+    DialogNew dn(this);
+    qDebug() << "2";
+    dn.exec();
+    qDebug() << "3";
+    qInfo() << "was cancelled: " << dn.wasCancelled();
+    qInfo() << "projName: " << dn.getProjectName();
+    qInfo() << "projDir: " << dn.getProjectDir();
+
+    if (dn.wasCancelled())
+    {
+        // nothing to do
+    }
+    else
+    {
+        // make some checks with name and path
+        const auto name = dn.getProjectName();
+        const auto path = dn.getProjectDir();
+        // is name empty?
+        if (name.isEmpty())
+        {
+            warnMsgBox("ERROR: Creation of new project aborted:", "No project name provided!");
+        }
+        // as name valid?
+        else if (!m_controller.isValidProjectName(name))
+        {
+            warnMsgBox("ERROR: Creation of new project aborted. No valid project name:", name);
+        }
+        else if(!path.exists())
+        {
+            warnMsgBox("ERROR: provided path does not exist:", path.path());
+        }
+        else
+        {
+            // set the new project as active project
+            m_controller.newProject(name, path);
+        }
+    }
 }
 
 void MainWindow::menuLoad()
@@ -156,6 +226,8 @@ void MainWindow::menuExit()
 void MainWindow::m_menuMenuAboutToShow()
 {
     qDebug() << "m_menuMenuAboutToShow()";
+
+    m_actionSave->setEnabled(m_controller.isProjectSet());
 }
 
 void MainWindow::m_menuDataAboutToShow()
@@ -276,10 +348,10 @@ void MainWindow::createMenus()
     newAction->setStatusTip(tr("create new project"));
     connect(newAction, &QAction::triggered, this, &MainWindow::menuNew);
 
-    QAction *saveAction = new QAction(tr("&Save"), this);
-    saveAction->setShortcut(QKeySequence::Save);
-    saveAction->setStatusTip(tr("save project"));
-    connect(saveAction, &QAction::triggered, this, &MainWindow::menuSave);
+    m_actionSave = new QAction(tr("&Save"), this);
+    m_actionSave->setShortcut(QKeySequence::Save);
+    m_actionSave->setStatusTip(tr("save project"));
+    connect(m_actionSave, &QAction::triggered, this, &MainWindow::menuSave);
 
     QAction *saveAsAction = new QAction(tr("Save &As"), this);
     saveAsAction->setShortcut(QKeySequence::SaveAs);
@@ -319,7 +391,7 @@ void MainWindow::createMenus()
     // the QMenu::addAction takes ownership of the returned QAction
     m_menuMenu->addAction(newAction);
     m_menuMenu->addAction(loadAction);
-    m_menuMenu->addAction(saveAction);
+    m_menuMenu->addAction(m_actionSave);
     m_menuMenu->addAction(saveAsAction);
     m_menuMenu->addSeparator();
     m_menuMenu->addAction(exitAction);

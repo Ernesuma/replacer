@@ -11,6 +11,7 @@
 #include <QMessageBox>
 
 #include "ui_mainwindow.h"
+#include "dialognew.h"
 #include "controller.h"
 
 namespace Ui
@@ -71,6 +72,7 @@ private:
     QMenu *m_menuData{nullptr};
     QMenu *m_menuHelp{nullptr};
 
+    QAction *m_actionSave{nullptr};
     QAction *m_actionExportPlain{nullptr};
     QAction *m_actionExportFinal{nullptr};
     QAction *m_actionExportTagList{nullptr};

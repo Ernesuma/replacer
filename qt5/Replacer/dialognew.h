@@ -1,0 +1,35 @@
+#ifndef DIALOGNEW_H
+#define DIALOGNEW_H
+
+#include<ui_dialognew.h>
+#include<QtDebug>
+#include<QWidget>
+#include<QFileDialog>
+#include<QDir>
+
+
+class DialogNew : public QDialog
+{
+    Q_OBJECT
+
+    // member
+    Ui::DialogNew* m_pDialogNew;
+    QString m_projectName{QString("")};
+    QDir m_projectDir{QDir("")};
+    bool m_cancelled{true};
+
+public:
+    DialogNew(QWidget *parent);
+    ~DialogNew();
+
+    //void setDialogReturns(String& name );
+    bool wasCancelled(){return m_cancelled;};
+    QString& getProjectName(){return m_projectName;};
+    QDir& getProjectDir(){return m_projectDir;};
+
+private slots:
+    void on_toolButton_clicked();
+    void on_buttonBox_accepted();
+};
+
+#endif // DIALOGNEW_H

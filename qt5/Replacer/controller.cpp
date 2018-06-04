@@ -131,6 +131,29 @@ bool Controller::replace()
                         m_pTagMapModel.get()->getTagMap());
 }
 
+bool Controller::isValidProjectName(const QString &name) const
+{
+    return Project::isValidName(name);
+}
+
+bool Controller::isProjectSet() const
+{
+    return m_project.isSet();
+}
+
+bool Controller::newProject(const QString &name, const QDir &path)
+{
+    m_project.set(name, path);
+}
+
+bool Controller::saveProject(const QDir &path) const
+{
+    bool returnValue{false};
+
+
+    return returnValue;
+}
+
 bool Controller::exportPlain(const QDir &path) const
 {
     return writeString2File(path, m_plainText);
@@ -164,4 +187,11 @@ bool Controller::importTagList(const QDir &path)
         }
     }
     return retVal;
+}
+
+void Controller::clear()
+{
+    RemoveAllTags();
+    SetPlainText("");
+    m_finalText = QString("");
 }

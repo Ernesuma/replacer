@@ -10,6 +10,8 @@
 
 #include "tagmapmodel.h"
 #include "replacer.h"
+#include "project.h"
+
 
 class Controller
 {
@@ -18,6 +20,7 @@ private:
     QString m_plainText{""};
     QString m_finalText{""};
     std::unique_ptr<TagMapModel> m_pTagMapModel{new TagMapModel()};
+    Project m_project{Project()};
 
 public:
     // constructor
@@ -40,12 +43,19 @@ public:
     bool RemoveAllTags();
     bool replace();
 
+    bool isValidProjectName(const QString& name) const;
+    bool isProjectSet() const;
+    bool newProject(const QString& name, const QDir& path);
+    bool saveProject(const QDir &path) const;
+
     bool exportPlain(const QDir &path) const;
     bool importPlain(const QDir &path);
     bool exportFinal(const QDir &path) const;
 
     bool exportTagList(const QDir &path) const;
     bool importTagList(const QDir &path);
+
+    void clear();
 };
 
 #endif // CONTROLLER_H
