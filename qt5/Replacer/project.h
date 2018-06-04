@@ -2,6 +2,7 @@
 #define PROJECT_H
 
 #include <QDir>
+#include <regex>
 
 class Project
 {
@@ -15,8 +16,11 @@ public:
     ~Project();
 
     bool isSet() const;
+    void set(const QString& name, const QDir& path);
 
     QString getProjectName() const;
+
+    static bool isValidName(const QString& name);
 };
 
 #endif // PROJECT_H
