@@ -189,6 +189,7 @@ bool TagMapModel::removeRows(int row, int count, const QModelIndex &parent)
 
 bool TagMapModel::removeRows(const QModelIndexList rows)
 {
+    bool returnValue = true;
     auto keys = m_map.uniqueKeys();
 
     QList<int> row_list;
@@ -209,9 +210,12 @@ bool TagMapModel::removeRows(const QModelIndexList rows)
     for (auto row_iter = row_list.rbegin(); row_iter != row_list.rend(); ++row_iter)
     {
         qDebug() << "DEBUG: TagMapModel::removeRows(rows): remove row now: " << *row_iter;
-        this->removeRow(*row_iter);
+        if (!this->removeRow(*row_iter))
+        {
+            returnValue = false;
+        }
     }
-    return true;
+    return returnValue;
 }
 
 bool TagMapModel::removeAllRows()
