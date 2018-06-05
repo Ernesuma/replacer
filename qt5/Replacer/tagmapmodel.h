@@ -16,9 +16,6 @@ class TagMapModel : public QAbstractTableModel
 
 private:
     // private Member
-    // --------------
-
-    //
     tagMap m_map{};
     tagMapKey m_newKey{""};
     tagMapKey m_newValue{""};

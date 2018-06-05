@@ -220,6 +220,7 @@ void MainWindow::menuSaveAs()
 
 void MainWindow::menuExit()
 {
+    // call close method of this MainWindow
     this->close();
 }
 
