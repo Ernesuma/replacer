@@ -141,7 +141,7 @@ bool Controller::isProjectSet() const
     return m_project.isSet();
 }
 
-bool Controller::newProject(const QString &name, const QDir &path)
+void Controller::newProject(const QString &name, const QDir &path)
 {
     m_project.set(name, path);
 }

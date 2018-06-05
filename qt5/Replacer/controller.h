@@ -45,7 +45,7 @@ public:
 
     bool isValidProjectName(const QString& name) const;
     bool isProjectSet() const;
-    bool newProject(const QString& name, const QDir& path);
+    void newProject(const QString& name, const QDir& path);
     bool saveProject(const QDir &path) const;
 
     bool exportPlain(const QDir &path) const;
