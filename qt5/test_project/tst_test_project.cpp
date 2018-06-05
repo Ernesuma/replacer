@@ -44,7 +44,8 @@ void Test_project::test_isValidName_negative()
     nameList.append("foo#bar");
     nameList.append("foo bar");
     nameList.append("foo/bar");
-    nameList.append("fooBar");
+    nameList.append(" fooBar");
+    nameList.append("fooBar ");
     for(auto name: nameList)
     {
         bool retVal = Project::isValidName(name);
