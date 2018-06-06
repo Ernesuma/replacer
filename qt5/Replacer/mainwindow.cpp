@@ -1,17 +1,17 @@
 #include "mainwindow.h"
 
-void infoMsgBox(const QString &info, const QString &info2=QString())
+void infoMsgBox(const QString &info, const QString &info2=QString(), QWidget* parent=nullptr)
 {
-    QMessageBox msgBox;
+    QMessageBox msgBox(parent);
     msgBox.setIcon(QMessageBox::Information);
     msgBox.setText(info);
     msgBox.setInformativeText(info2);
     msgBox.exec();
 }
 
-void warnMsgBox(const QString &info, const QString &info2=QString())
+void warnMsgBox(const QString &info, const QString &info2=QString(), QWidget* parent=nullptr)
 {
-    QMessageBox mBox;
+    QMessageBox mBox(parent);
     mBox.setIcon(QMessageBox::Warning);
     mBox.setText(info);
     mBox.setInformativeText(info2);
@@ -184,16 +184,16 @@ void MainWindow::menuNew()
         // is name empty?
         if (name.isEmpty())
         {
-            warnMsgBox("ERROR: Creation of new project aborted:", "No project name provided!");
+            warnMsgBox("ERROR: Creation of new project aborted:", "No project name provided!", this);
         }
         // as name valid?
         else if (!m_controller.isValidProjectName(name))
         {
-            warnMsgBox("ERROR: Creation of new project aborted. No valid project name:", name);
+            warnMsgBox("ERROR: Creation of new project aborted. No valid project name:", name, this);
         }
         else if(!path.exists())
         {
-            warnMsgBox("ERROR: provided path does not exist:", path.path());
+            warnMsgBox("ERROR: provided path does not exist:", path.path(), this);
         }
         else
         {
@@ -256,7 +256,7 @@ void MainWindow::menuExportPlain()
         qInfo() << exportFilePath.absolutePath();
         m_controller.exportPlain(exportFilePath);
 
-        infoMsgBox("Exported plain text to:", exportFilePath.absolutePath());
+        infoMsgBox("Exported plain text to:", exportFilePath.absolutePath(), this);
     }
 }
 
@@ -271,7 +271,7 @@ void MainWindow::menuImportPlain()
         m_controller.importPlain(importFilePath);
         ui->textEdit_plain->setText(m_controller.GetPlainText());
 
-        infoMsgBox("Imported plain text from file:", importFilePath.absolutePath());
+        infoMsgBox("Imported plain text from file:", importFilePath.absolutePath(), this);
     }
 }
 
@@ -285,7 +285,7 @@ void MainWindow::menuExportFinal()
         qInfo() << exportFilePath.absolutePath();
         m_controller.exportFinal(exportFilePath);
 
-        infoMsgBox("Exported final text to file:", exportFilePath.absolutePath());
+        infoMsgBox("Exported final text to file:", exportFilePath.absolutePath(), this);
     }
 }
 
@@ -299,7 +299,7 @@ void MainWindow::menuExportTagList()
         qInfo() << exportFilePath.absolutePath();
         m_controller.exportTagList(exportFilePath);
 
-        infoMsgBox("Exported tag list to file:", exportFilePath.absolutePath());
+        infoMsgBox("Exported tag list to file:", exportFilePath.absolutePath(), this);
     }
 }
 
@@ -312,11 +312,11 @@ void MainWindow::menuImportTagList()
         QDir importFilePath{tmpStr};
         if (m_controller.importTagList(importFilePath))
         {
-            infoMsgBox("Imported tag list from file:", importFilePath.absolutePath());
+            infoMsgBox("Imported tag list from file:", importFilePath.absolutePath(), this);
         }
         else
         {
-            warnMsgBox("Failed to import file:", importFilePath.absolutePath());
+            warnMsgBox("Failed to import file:", importFilePath.absolutePath(), this);
         }
     }
 }
