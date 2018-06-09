@@ -37,3 +37,6 @@ FORMS += \
         dialognew.ui
 
 include(Replacer.pri)
+
+RESOURCES += \
+    icon.qrc
