@@ -169,6 +169,7 @@ void MainWindow::menuNew()
     qInfo() << "projName: " << projDialog.getProjectName();
     qInfo() << "projDir: " << projDialog.getProjectDir();
 
+    // if projDialog was cancelled by user
     if (projDialog.wasCancelled())
     {
         // nothing to do
