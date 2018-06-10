@@ -47,6 +47,8 @@ public:
     bool isProjectSet() const;
     void newProject(const QString& name, const QDir& path);
     bool saveProject(const QDir &path) const;
+    const QString& getProjectName() const;
+    const QDir& getProjectPath() const;
 
     bool exportPlain(const QDir &path) const;
     bool importPlain(const QDir &path);

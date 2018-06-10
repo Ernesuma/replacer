@@ -121,6 +121,13 @@
       </widget>
      </widget>
     </item>
+    <item>
+     <widget class="QLabel" name="label_projectInfo">
+      <property name="text">
+       <string>Project: No Project Set</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QDockWidget" name="dockWidget">

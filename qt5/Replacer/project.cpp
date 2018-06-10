@@ -26,9 +26,14 @@ void Project::set(const QString &name, const QDir &path)
     return;
 }
 
-QString Project::getProjectName() const
+const QString &Project::getProjectName() const
 {
     return m_name;
+}
+
+const QDir &Project::getProjectPath() const
+{
+    return m_projectPath;
 }
 
 bool Project::isValidName(const QString &name)

@@ -76,6 +76,8 @@ private:
     QAction *m_actionExportPlain{nullptr};
     QAction *m_actionExportFinal{nullptr};
     QAction *m_actionExportTagList{nullptr};
+
+    void updateProjectInfoLabel();
 };
 
 #endif // MAINWINDOW_H

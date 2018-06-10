@@ -197,6 +197,7 @@ void MainWindow::menuNew()
         {
             // set the new project as active project
             m_controller.newProject(name, path);
+            updateProjectInfoLabel();
         }
     }
 }
@@ -408,4 +409,12 @@ void MainWindow::createMenus()
     connect(m_menuMenu, &QMenu::aboutToShow, this, &MainWindow::m_menuMenuAboutToShow);
     connect(m_menuData, &QMenu::aboutToShow, this, &MainWindow::m_menuDataAboutToShow);
     connect(m_menuHelp, &QMenu::aboutToShow, this, &MainWindow::m_menuHelpAboutToShow);
+}
+
+void MainWindow::updateProjectInfoLabel()
+{
+    QString name{m_controller.getProjectName()};
+    QString path{m_controller.getProjectPath().absolutePath()};
+    QString projectInfo{"Project: " + name + " (" + path + ")"};
+    ui->label_projectInfo->setText(projectInfo);
 }

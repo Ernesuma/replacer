@@ -18,7 +18,8 @@ public:
     bool isSet() const;
     void set(const QString& name, const QDir& path);
 
-    QString getProjectName() const;
+    const QString &getProjectName() const;
+    const QDir& getProjectPath() const;
 
     static bool isValidName(const QString& name);
 };

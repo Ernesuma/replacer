@@ -154,6 +154,16 @@ bool Controller::saveProject(const QDir &path) const
     return returnValue;
 }
 
+const QString &Controller::getProjectName() const
+{
+    return m_project.getProjectName();
+}
+
+const QDir &Controller::getProjectPath() const
+{
+    return m_project.getProjectPath();
+}
+
 bool Controller::exportPlain(const QDir &path) const
 {
     return writeString2File(path, m_plainText);
