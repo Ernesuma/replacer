@@ -6,6 +6,7 @@
 #include<QWidget>
 #include<QFileDialog>
 #include<QDir>
+#include<QPushButton>
 
 
 class ProjectDialog : public QDialog
@@ -30,6 +31,11 @@ public:
 private slots:
     void on_toolButton_clicked();
     void on_buttonBox_accepted();
+    void on_lineEdit_proDir_textChanged();
+    void on_lineEdit_proName_textChanged();
+
+private:
+    void okBtnDisableIfNeeded();
 };
 
 #endif // DIALOGNEW_H
