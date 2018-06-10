@@ -1,10 +1,11 @@
 #include "projectdialog.h"
 
-ProjectDialog::ProjectDialog(QWidget *parent):
+ProjectDialog::ProjectDialog(const QString &title, QWidget *parent):
     QDialog(parent),
     m_pProjectDialog(new Ui::ProjectDialog)
 {
     m_pProjectDialog->setupUi(this);
+    setWindowTitle(title);
 }
 
 ProjectDialog::~ProjectDialog()

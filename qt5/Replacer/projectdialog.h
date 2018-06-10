@@ -19,7 +19,7 @@ class ProjectDialog : public QDialog
     bool m_cancelled{true};
 
 public:
-    ProjectDialog(QWidget *parent);
+    ProjectDialog(const QString &title, QWidget *parent);
     ~ProjectDialog();
 
     //void setDialogReturns(String& name );

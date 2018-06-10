@@ -163,11 +163,8 @@ void MainWindow::menuNew()
     m_controller.clear();
 
     // open new project dialog
-    qDebug() << "1";
-    ProjectDialog projDialog(this);
-    qDebug() << "2";
+    ProjectDialog projDialog("Setup New Project", this);
     projDialog.exec();
-    qDebug() << "3";
     qInfo() << "was cancelled: " << projDialog.wasCancelled();
     qInfo() << "projName: " << projDialog.getProjectName();
     qInfo() << "projDir: " << projDialog.getProjectDir();
