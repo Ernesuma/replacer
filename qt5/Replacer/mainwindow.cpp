@@ -164,23 +164,23 @@ void MainWindow::menuNew()
 
     // open new project dialog
     qDebug() << "1";
-    DialogNew dn(this);
+    ProjectDialog projDialog(this);
     qDebug() << "2";
-    dn.exec();
+    projDialog.exec();
     qDebug() << "3";
-    qInfo() << "was cancelled: " << dn.wasCancelled();
-    qInfo() << "projName: " << dn.getProjectName();
-    qInfo() << "projDir: " << dn.getProjectDir();
+    qInfo() << "was cancelled: " << projDialog.wasCancelled();
+    qInfo() << "projName: " << projDialog.getProjectName();
+    qInfo() << "projDir: " << projDialog.getProjectDir();
 
-    if (dn.wasCancelled())
+    if (projDialog.wasCancelled())
     {
         // nothing to do
     }
     else
     {
         // make some checks with name and path
-        const auto name = dn.getProjectName();
-        const auto path = dn.getProjectDir();
+        const auto name = projDialog.getProjectName();
+        const auto path = projDialog.getProjectDir();
         // is name empty?
         if (name.isEmpty())
         {

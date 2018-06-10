@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DialogNew</class>
- <widget class="QDialog" name="DialogNew">
+ <class>ProjectDialog</class>
+ <widget class="QDialog" name="ProjectDialog">
   <property name="windowModality">
    <enum>Qt::ApplicationModal</enum>
   </property>
@@ -111,7 +111,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>DialogNew</receiver>
+   <receiver>ProjectDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -127,7 +127,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>DialogNew</receiver>
+   <receiver>ProjectDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

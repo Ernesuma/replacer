@@ -11,7 +11,7 @@
 #include <QMessageBox>
 
 #include "ui_mainwindow.h"
-#include "dialognew.h"
+#include "projectdialog.h"
 #include "controller.h"
 
 namespace Ui

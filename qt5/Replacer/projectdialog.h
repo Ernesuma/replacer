@@ -1,26 +1,26 @@
 #ifndef DIALOGNEW_H
 #define DIALOGNEW_H
 
-#include<ui_dialognew.h>
+#include<ui_projectdialog.h>
 #include<QtDebug>
 #include<QWidget>
 #include<QFileDialog>
 #include<QDir>
 
 
-class DialogNew : public QDialog
+class ProjectDialog : public QDialog
 {
     Q_OBJECT
 
     // member
-    Ui::DialogNew* m_pDialogNew;
+    Ui::ProjectDialog* m_pProjectDialog;
     QString m_projectName{QString("")};
     QDir m_projectDir{QDir("")};
     bool m_cancelled{true};
 
 public:
-    DialogNew(QWidget *parent);
-    ~DialogNew();
+    ProjectDialog(QWidget *parent);
+    ~ProjectDialog();
 
     //void setDialogReturns(String& name );
     bool wasCancelled(){return m_cancelled;};

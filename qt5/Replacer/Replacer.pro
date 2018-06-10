@@ -26,15 +26,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    dialognew.cpp
+    projectdialog.cpp
 
 HEADERS += \
         mainwindow.h \
-    dialognew.h
+    projectdialog.h
 
 FORMS += \
         mainwindow.ui \
-        dialognew.ui
+    projectdialog.ui
 
 include(Replacer.pri)
 
