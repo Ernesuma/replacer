@@ -143,10 +143,39 @@ bool Controller::isProjectSet() const
 
 void Controller::newProject(const QString &name, const QDir &path, QWidget *ui)
 {
-    m_project.set(name, path);
+    // check for valid parameters name and path
+    if (path.exists() && Project::isValidName(name))
+    {
+        // append name to path to test for already existing directory
+        QDir projPath = QDir(path.absolutePath() + QDir::separator() + name);
+
+        // if directory does not exist, create it
+        if (!projPath.exists())
+        {
+            if (path.mkdir(name))
+            {
+                // do nothing, succesfully created new project directory
+            }
+            else
+            {
+                warnMsgBox("ERROR: Could not create project directory! Aborted creating new project.",
+                           projPath.absolutePath(),
+                           ui);
+                return;
+            }
+        }
+
+        // save name and project path
+        m_project.set(name, projPath);
+    }
+    else
+    {
+        // Warn user about invalid parameters
+        warnMsgBox("ERROR: Invalid project parameters for new project",
+                   "'" + name + "' (" + path.absolutePath() + ")" ,
+                   ui);
+    }
 }
-
-
 
 void Controller::saveProject(QWidget *ui) const
 {
