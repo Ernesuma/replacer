@@ -1,33 +1,5 @@
 #include "mainwindow.h"
 
-void infoMsgBox(const QString &info, const QString &info2=QString(), QWidget* parent=nullptr)
-{
-    QMessageBox msgBox(parent);
-    msgBox.setIcon(QMessageBox::Information);
-    msgBox.setText(info);
-    msgBox.setInformativeText(info2);
-    msgBox.exec();
-}
-
-void warnMsgBox(const QString &info, const QString &info2=QString(), QWidget* parent=nullptr)
-{
-    QMessageBox mBox(parent);
-    mBox.setIcon(QMessageBox::Warning);
-    mBox.setText(info);
-    mBox.setInformativeText(info2);
-    mBox.exec();
-}
-
-bool reallyAllNew(QWidget* parent, const QString& title, const QString &info)
-{
-    int ret = QMessageBox::warning(parent, title, info,
-                                 QMessageBox::Cancel | QMessageBox::Ok,
-                                 QMessageBox::Cancel);
-    if (QMessageBox::Ok == ret)
-        return true;
-    return false;
-}
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -196,7 +168,7 @@ void MainWindow::menuNew()
         else
         {
             // set the new project as active project
-            m_controller.newProject(name, path);
+            m_controller.newProject(name, path, this);
             updateProjectInfoLabel();
         }
     }
@@ -210,6 +182,7 @@ void MainWindow::menuLoad()
 void MainWindow::menuSave()
 {
     qInfo() << "clicked 'Save'";
+    m_controller.saveProject(this);
 }
 
 void MainWindow::menuSaveAs()

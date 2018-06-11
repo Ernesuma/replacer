@@ -141,17 +141,15 @@ bool Controller::isProjectSet() const
     return m_project.isSet();
 }
 
-void Controller::newProject(const QString &name, const QDir &path)
+void Controller::newProject(const QString &name, const QDir &path, QWidget *ui)
 {
     m_project.set(name, path);
 }
 
-bool Controller::saveProject(const QDir &path) const
+
+
+void Controller::saveProject(QWidget *ui) const
 {
-    bool returnValue{false};
-
-
-    return returnValue;
 }
 
 const QString &Controller::getProjectName() const
