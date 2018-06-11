@@ -179,6 +179,14 @@ void Controller::newProject(const QString &name, const QDir &path, QWidget *ui)
 
 void Controller::saveProject(QWidget *ui) const
 {
+    if (!isProjectSet())
+    {
+        warnMsgBox("ERROR: No project set!", "", ui);
+    }
+    else
+    {
+        //exportPlain()
+    }
 }
 
 const QString &Controller::getProjectName() const
