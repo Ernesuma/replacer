@@ -8,12 +8,15 @@
 #include <memory>
 #include <QDir>
 
+#include "projectdialog.h"
 #include "tagmapmodel.h"
 #include "replacer.h"
 #include "project.h"
 #include "msgboxhelper.h"
 #include "pathhelper.h"
+#include <mainwindow.h>
 
+class MainWindow;
 
 class Controller
 {
@@ -47,7 +50,7 @@ public:
 
     bool isValidProjectName(const QString& name) const;
     bool isProjectSet() const;
-    void newProject(const QString& name, const QDir& path, QWidget *ui);
+    void newProject(MainWindow *ui);
     void saveProject(QWidget *ui) const;
     const QString& getProjectName() const;
     const QDir& getProjectPath() const;

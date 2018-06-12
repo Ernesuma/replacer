@@ -141,40 +141,88 @@ bool Controller::isProjectSet() const
     return m_project.isSet();
 }
 
-void Controller::newProject(const QString &name, const QDir &path, QWidget *ui)
+void Controller::newProject(MainWindow *ui)
 {
-    // check for valid parameters name and path
-    if (path.exists() && Project::isValidName(name))
+    // if there is some text or some tags:
+    // ask user for confirmation to clear everything
+    if (!(isTagMapEmpty() &
+          GetPlainText().isEmpty() &
+          GetFinalText().isEmpty()))
     {
-        // append name to path to test for already existing directory
-        QDir projPath = QDir(path.absolutePath() + QDir::separator() + name);
-
-        // if directory does not exist, create it
-        if (!projPath.exists())
+        QString title{QString("New Project")};
+        QString info{QString("Do you really want to create a new project?\nAll unsaved changes will be lost…")};
+        if (!reallyAllNew(ui, title, info))
         {
-            if (path.mkdir(name))
-            {
-                // do nothing, succesfully created new project directory
-            }
-            else
-            {
-                warnMsgBox("ERROR: Could not create project directory! Aborted creating new project.",
-                           projPath.absolutePath(),
-                           ui);
-                return;
-            }
+            // abort creation of new menu
+            return;
         }
+    }
 
-        // save name and project path
-        m_project.set(name, projPath);
-    }
-    else
+    // clear all texts and tags
+    ui->clearTextEdits();
+    clear();
+
+    // open new project dialog
+    ProjectDialog projDialog("Setup New Project", ui);
+    projDialog.exec();
+    qInfo() << "was cancelled: " << projDialog.wasCancelled();
+    qInfo() << "projName: " << projDialog.getProjectName();
+    qInfo() << "projDir: " << projDialog.getProjectDir();
+
+    // if projDialog was cancelled by user
+    if (projDialog.wasCancelled())
     {
-        // Warn user about invalid parameters
-        warnMsgBox("ERROR: Invalid project parameters for new project",
-                   "'" + name + "' (" + path.absolutePath() + ")" ,
-                   ui);
+        // abort creation of new project
+        return;
     }
+
+    // make some checks with name and path
+    const auto name = projDialog.getProjectName();
+    const auto path = projDialog.getProjectDir();
+    // is name empty?
+    if (name.isEmpty())
+    {
+        warnMsgBox("ERROR: Creation of new project aborted:",
+                   "No project name provided!",
+                   ui);
+        return;
+    }
+
+    // is name valid?
+    if (!isValidProjectName(name))
+    {
+        warnMsgBox("ERROR: Creation of new project aborted. No valid project name:",
+                   name,
+                   ui);
+        return;
+    }
+
+    if(!path.exists())
+    {
+        warnMsgBox("ERROR: provided path does not exist:",
+                   path.path(),
+                   ui);
+        return;
+    }
+
+    // append name to path to test for already existing directory
+    QDir projPath = QDir(path.absolutePath() + QDir::separator() + name);
+
+    // if directory does not exist, create it
+    if (!projPath.exists())
+    {
+        if (!path.mkdir(name))
+        {
+            warnMsgBox("ERROR: Could not create project directory! Aborted creating new project.",
+                       projPath.absolutePath(),
+                       ui);
+            return;
+        }
+    }
+
+    // set the new project as active project
+    m_project.set(name, projPath);
+    ((MainWindow*) ui)->updateProjectInfoLabel();
 }
 
 void Controller::saveProject(QWidget *ui) const

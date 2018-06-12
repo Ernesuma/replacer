@@ -11,7 +11,6 @@
 #include <QMessageBox>
 
 #include "ui_mainwindow.h"
-#include "projectdialog.h"
 #include "controller.h"
 
 namespace Ui
@@ -19,6 +18,7 @@ namespace Ui
     class MainWindow;
 }
 
+class Controller;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -26,6 +26,9 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+    void clearTextEdits();
+    void updateProjectInfoLabel();
 
 private slots:
     void on_textEdit_plain_textChanged();
@@ -76,8 +79,6 @@ private:
     QAction *m_actionExportPlain{nullptr};
     QAction *m_actionExportFinal{nullptr};
     QAction *m_actionExportTagList{nullptr};
-
-    void updateProjectInfoLabel();
 };
 
 #endif // MAINWINDOW_H

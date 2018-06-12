@@ -29,6 +29,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::clearTextEdits()
+{
+    // clear the plain and the final text edit fields
+    ui->textEdit_plain->setText("");
+    ui->textEdit_final->setText("");
+}
+
 void MainWindow::on_pushButton_c2c_plain_clicked()
 {
     //qInfo() << "copy 2 clipboard - plain";
@@ -112,66 +119,8 @@ void MainWindow::on_pushButton_remove_all_tags_clicked()
 
 void MainWindow::menuNew()
 {
-    // debug info
     qInfo() << "clicked 'New'";
-
-    // if there is some text or some tags:
-    // ask user for confirmation to clear everything
-    if (!(m_controller.isTagMapEmpty() &
-          m_controller.GetPlainText().isEmpty() &
-          m_controller.GetFinalText().isEmpty()))
-    {
-        QString title{QString("New Project")};
-        QString info{QString("Do you really want to create a new project?\nAll unsaved changes will be lost…")};
-        if (!reallyAllNew(this, title, info))
-        {
-            // abort creation of new menu
-            return;
-        }
-    }
-    // clear all texts and tags
-    ui->textEdit_plain->setText("");
-    ui->textEdit_final->setText("");
-    m_controller.clear();
-
-    // open new project dialog
-    ProjectDialog projDialog("Setup New Project", this);
-    projDialog.exec();
-    qInfo() << "was cancelled: " << projDialog.wasCancelled();
-    qInfo() << "projName: " << projDialog.getProjectName();
-    qInfo() << "projDir: " << projDialog.getProjectDir();
-
-    // if projDialog was cancelled by user
-    if (projDialog.wasCancelled())
-    {
-        // nothing to do
-    }
-    else
-    {
-        // make some checks with name and path
-        const auto name = projDialog.getProjectName();
-        const auto path = projDialog.getProjectDir();
-        // is name empty?
-        if (name.isEmpty())
-        {
-            warnMsgBox("ERROR: Creation of new project aborted:", "No project name provided!", this);
-        }
-        // as name valid?
-        else if (!m_controller.isValidProjectName(name))
-        {
-            warnMsgBox("ERROR: Creation of new project aborted. No valid project name:", name, this);
-        }
-        else if(!path.exists())
-        {
-            warnMsgBox("ERROR: provided path does not exist:", path.path(), this);
-        }
-        else
-        {
-            // set the new project as active project
-            m_controller.newProject(name, path, this);
-            updateProjectInfoLabel();
-        }
-    }
+    m_controller.newProject(this);
 }
 
 void MainWindow::menuLoad()
