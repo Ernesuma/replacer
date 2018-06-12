@@ -99,6 +99,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QPushButton" name="pushButton_exportFinal">
+            <property name="text">
+             <string>&amp;Export</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="pushButton_c2c_final">
             <property name="text">
              <string>To &amp;Clipboard</string>

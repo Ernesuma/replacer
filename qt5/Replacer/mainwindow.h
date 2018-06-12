@@ -33,6 +33,7 @@ private slots:
     void on_pushButton_c2c_plain_clicked();
     void on_pushButton_c2c_final_clicked();
     void on_pushButton_replace_clicked();
+    void on_pushButton_exportFinal_clicked();
 
     void on_pushButton_add_2_tag_list_clicked();
     void on_pushButton_remove_tag_clicked();

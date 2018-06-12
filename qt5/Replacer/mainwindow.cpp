@@ -411,3 +411,8 @@ void MainWindow::createMenus()
     connect(m_menuData, &QMenu::aboutToShow, this, &MainWindow::m_menuDataAboutToShow);
     connect(m_menuHelp, &QMenu::aboutToShow, this, &MainWindow::m_menuHelpAboutToShow);
 }
+
+void MainWindow::on_pushButton_exportFinal_clicked()
+{
+    this->menuExportFinal();
+}
