@@ -185,7 +185,15 @@ void Controller::saveProject(QWidget *ui) const
     }
     else
     {
-        //exportPlain()
+        // use export function to save plain text to file in project dir
+        QString plainFile{appendSuffix(getProjectName(), "plain")};
+        QDir filePathPlain{concatinatePaths(getProjectPath(), QDir(plainFile))};
+        exportPlain(filePathPlain);
+
+        // use export function to save tags to file in project dir
+        QString tagFile{appendSuffix(getProjectName(), "tags")};
+        QDir filePathTags{concatinatePaths(getProjectPath(), QDir(tagFile))};
+        exportTagList(filePathTags);
     }
 }
 

@@ -12,6 +12,7 @@
 #include "replacer.h"
 #include "project.h"
 #include "msgboxhelper.h"
+#include "pathhelper.h"
 
 
 class Controller
