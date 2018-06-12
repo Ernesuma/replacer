@@ -29,6 +29,7 @@ public:
 
 private slots:
     void on_textEdit_plain_textChanged();
+    void on_textEdit_final_textChanged();
 
     void on_pushButton_c2c_plain_clicked();
     void on_pushButton_c2c_final_clicked();

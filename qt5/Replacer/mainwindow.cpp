@@ -65,9 +65,13 @@ void MainWindow::on_pushButton_c2c_plain_clicked()
 
 void MainWindow::on_textEdit_plain_textChanged()
 {
-    //qInfo() << ui->textEdit_plain->toPlainText();
+    // set the plain text in the controller
     m_controller.SetPlainText(ui->textEdit_plain->toPlainText());
-    //qInfo() << m_model.GetPlainText();
+
+    // disable the plain text related buttons when there is no text
+    bool isPlainTextEmpty = m_controller.GetPlainText().isEmpty();
+    ui->pushButton_replace->setDisabled(isPlainTextEmpty);
+    ui->pushButton_c2c_plain->setDisabled(isPlainTextEmpty);
 }
 
 void MainWindow::on_pushButton_c2c_final_clicked()
@@ -415,4 +419,12 @@ void MainWindow::createMenus()
 void MainWindow::on_pushButton_exportFinal_clicked()
 {
     this->menuExportFinal();
+}
+
+void MainWindow::on_textEdit_final_textChanged()
+{
+    // disable the final text related buttons when there is no final text, yet
+    bool isFinalEmpty{m_controller.GetFinalText().isEmpty()};
+    ui->pushButton_exportFinal->setDisabled(isFinalEmpty);
+    ui->pushButton_c2c_final->setDisabled(isFinalEmpty);
 }

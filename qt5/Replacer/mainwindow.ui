@@ -52,6 +52,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="pushButton_replace">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>&amp;Replace</string>
             </property>
@@ -59,6 +62,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="pushButton_c2c_plain">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>&amp;To Clipboard</string>
             </property>
@@ -100,6 +106,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="pushButton_exportFinal">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>&amp;Export</string>
             </property>
@@ -107,6 +116,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="pushButton_c2c_final">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>To &amp;Clipboard</string>
             </property>
